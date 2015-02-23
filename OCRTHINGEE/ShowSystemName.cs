@@ -103,8 +103,8 @@ namespace OCRTHINGEE
             }
 
 
-            Form1.Systemname = textBox2.Text;
-            Form1.Stationname = textBox1.Text;
+            OCRThingee.Systemname = textBox2.Text;
+            OCRThingee.Stationname = textBox1.Text;
             DialogResult = DialogResult.OK;
         }
 
@@ -137,8 +137,8 @@ namespace OCRTHINGEE
             textBox2.AutoCompleteCustomSource = systemcollection;
             textBox1.AutoCompleteCustomSource = stationcollection;
 
-            textBox2.Text = Form1.Systemname;
-            textBox1.Text = Form1.Stationname;
+            textBox2.Text = OCRThingee.Systemname;
+            textBox1.Text = OCRThingee.Stationname;
         }
     }
 }

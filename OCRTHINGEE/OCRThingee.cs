@@ -10,7 +10,7 @@ using ImageFormat = System.Drawing.Imaging.ImageFormat;
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
-    public partial class Form1 : Form
+    public partial class OCRThingee : Form
     {
         public static string Stationname;
         public static string Systemname;
@@ -24,7 +24,7 @@ namespace OCRTHINGEE
         ShowSystemName _showSystemName;
       
 
-        public Form1()
+        public OCRThingee()
         {
             InitializeComponent();
        

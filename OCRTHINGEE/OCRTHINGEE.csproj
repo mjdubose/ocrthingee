@@ -135,11 +135,11 @@
     <Compile Include="ConsumerItemsList.cs" />
     <Compile Include="Coord.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="OCRThingee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="OCRThingee.Designer.cs">
+      <DependentUpon>OCRThingee.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageAndRowList.cs" />
     <Compile Include="InterfaceColumnsAndRows.cs" />
@@ -187,8 +187,8 @@
       <DependentUpon>testDataSet4.xsd</DependentUpon>
     </Compile>
     <Compile Include="TradeProfitView.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="OCRThingee.resx">
+      <DependentUpon>OCRThingee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

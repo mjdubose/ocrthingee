@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace OCRTHINGEE
 {
-    partial class Form1
+    partial class OCRThingee
     {
         /// <summary>
         /// Required designer variable.
