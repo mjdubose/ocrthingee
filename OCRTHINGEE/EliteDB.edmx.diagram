@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fda6ea1c8fb64f44b7aefe882d714d08" Name="Diagram1">
+        <EntityTypeShape EntityType="elite_testingModel.item" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="elite_testingModel.station" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="elite_testingModel.system" Width="1.5" PointX="0.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="elite_testingModel.tradeitem" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="elite_testingModel.tradeitems_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="elite_testingModel.tradeitems_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="elite_testingModel.station_ibfk_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

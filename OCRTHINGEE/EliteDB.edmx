@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="elite_testingModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="items">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="station">
+          <Key>
+            <PropertyRef Name="stationid" />
+          </Key>
+          <Property Name="stationid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sysid" Type="int" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="system">
+          <Key>
+            <PropertyRef Name="sysid" />
+          </Key>
+          <Property Name="sysid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tradeitems">
+          <Key>
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="ProductsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stationid" Type="int" Nullable="false" />
+          <Property Name="itemid" Type="int" Nullable="false" />
+          <Property Name="buyprice" Type="int" />
+          <Property Name="sellprice" Type="int" />
+          <Property Name="supply" Type="int" />
+          <Property Name="lastupdate" Type="datetime" Precision="0" />
+        </EntityType>
+        <Association Name="station_ibfk_1">
+          <End Role="system" Type="Self.system" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="station" Type="Self.station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system">
+              <PropertyRef Name="sysid" />
+            </Principal>
+            <Dependent Role="station">
+              <PropertyRef Name="sysid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tradeitems_ibfk_2">
+          <End Role="station" Type="Self.station" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tradeitems" Type="Self.tradeitems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="station">
+              <PropertyRef Name="stationid" />
+            </Principal>
+            <Dependent Role="tradeitems">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tradeitems_ibfk_3">
+          <End Role="items" Type="Self.items" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tradeitems" Type="Self.tradeitems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="itemid" />
+            </Principal>
+            <Dependent Role="tradeitems">
+              <PropertyRef Name="itemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elite_testingModelStoreContainer">
+          <EntitySet Name="items" EntityType="Self.items" Schema="elite_testing" store:Type="Tables" />
+          <EntitySet Name="station" EntityType="Self.station" Schema="elite_testing" store:Type="Tables" />
+          <EntitySet Name="system" EntityType="Self.system" Schema="elite_testing" store:Type="Tables" />
+          <EntitySet Name="tradeitems" EntityType="Self.tradeitems" Schema="elite_testing" store:Type="Tables" />
+          <AssociationSet Name="station_ibfk_1" Association="Self.station_ibfk_1">
+            <End Role="system" EntitySet="system" />
+            <End Role="station" EntitySet="station" />
+          </AssociationSet>
+          <AssociationSet Name="tradeitems_ibfk_2" Association="Self.tradeitems_ibfk_2">
+            <End Role="station" EntitySet="station" />
+            <End Role="tradeitems" EntitySet="tradeitems" />
+          </AssociationSet>
+          <AssociationSet Name="tradeitems_ibfk_3" Association="Self.tradeitems_ibfk_3">
+            <End Role="items" EntitySet="items" />
+            <End Role="tradeitems" EntitySet="tradeitems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="elite_testingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tradeitems" Relationship="Self.tradeitems_ibfk_3" FromRole="items" ToRole="tradeitems" />
+        </EntityType>
+        <EntityType Name="station">
+          <Key>
+            <PropertyRef Name="stationid" />
+          </Key>
+          <Property Name="stationid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sysid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tradeitems" Relationship="Self.tradeitems_ibfk_2" FromRole="station" ToRole="tradeitems" />
+          <NavigationProperty Name="system" Relationship="elite_testingModel.station_ibfk_1" FromRole="station" ToRole="system" />
+        </EntityType>
+        <EntityType Name="system">
+          <Key>
+            <PropertyRef Name="sysid" />
+          </Key>
+          <Property Name="sysid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="stations" Relationship="elite_testingModel.station_ibfk_1" FromRole="system" ToRole="station" />
+        </EntityType>
+        <EntityType Name="tradeitem">
+          <Key>
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="ProductsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stationid" Type="Int32" Nullable="false" />
+          <Property Name="itemid" Type="Int32" Nullable="false" />
+          <Property Name="buyprice" Type="Int32" />
+          <Property Name="sellprice" Type="Int32" />
+          <Property Name="supply" Type="Int32" />
+          <Property Name="lastupdate" Type="DateTime" />
+          <NavigationProperty Name="item" Relationship="Self.tradeitems_ibfk_3" FromRole="tradeitems" ToRole="items" />
+          <NavigationProperty Name="station" Relationship="Self.tradeitems_ibfk_2" FromRole="tradeitems" ToRole="station" />
+        </EntityType>
+        <Association Name="tradeitems_ibfk_3">
+          <End Role="items" Type="Self.item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tradeitems" Type="Self.tradeitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="itemid" />
+            </Principal>
+            <Dependent Role="tradeitems">
+              <PropertyRef Name="itemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tradeitems_ibfk_2">
+          <End Role="station" Type="Self.station" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tradeitems" Type="Self.tradeitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="station">
+              <PropertyRef Name="stationid" />
+            </Principal>
+            <Dependent Role="tradeitems">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elite_testingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="items" EntityType="Self.item" />
+          <EntitySet Name="stations" EntityType="Self.station" />
+          <EntitySet Name="systems" EntityType="Self.system" />
+          <EntitySet Name="tradeitems" EntityType="Self.tradeitem" />
+          <AssociationSet Name="tradeitems_ibfk_3" Association="Self.tradeitems_ibfk_3">
+            <End Role="items" EntitySet="items" />
+            <End Role="tradeitems" EntitySet="tradeitems" />
+          </AssociationSet>
+          <AssociationSet Name="tradeitems_ibfk_2" Association="Self.tradeitems_ibfk_2">
+            <End Role="station" EntitySet="stations" />
+            <End Role="tradeitems" EntitySet="tradeitems" />
+          </AssociationSet>
+          <AssociationSet Name="station_ibfk_1" Association="elite_testingModel.station_ibfk_1">
+            <End Role="system" EntitySet="systems" />
+            <End Role="station" EntitySet="stations" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="station_ibfk_1">
+          <End Type="elite_testingModel.system" Role="system" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="elite_testingModel.station" Role="station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system">
+              <PropertyRef Name="sysid" />
+            </Principal>
+            <Dependent Role="station">
+              <PropertyRef Name="sysid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="elite_testingModelStoreContainer" CdmEntityContainer="elite_testingEntities">
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="elite_testingModel.item">
+              <MappingFragment StoreEntitySet="items">
+                <ScalarProperty Name="itemid" ColumnName="itemid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stations">
+            <EntityTypeMapping TypeName="elite_testingModel.station">
+              <MappingFragment StoreEntitySet="station">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="sysid" ColumnName="sysid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systems">
+            <EntityTypeMapping TypeName="elite_testingModel.system">
+              <MappingFragment StoreEntitySet="system">
+                <ScalarProperty Name="sysid" ColumnName="sysid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tradeitems">
+            <EntityTypeMapping TypeName="elite_testingModel.tradeitem">
+              <MappingFragment StoreEntitySet="tradeitems">
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="itemid" ColumnName="itemid" />
+                <ScalarProperty Name="buyprice" ColumnName="buyprice" />
+                <ScalarProperty Name="sellprice" ColumnName="sellprice" />
+                <ScalarProperty Name="supply" ColumnName="supply" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
