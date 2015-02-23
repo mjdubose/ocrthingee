@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
-
+//https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
     public partial class Form1 : Form
