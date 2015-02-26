@@ -84,7 +84,7 @@ namespace OCRTHINGEE
             var imageX = new Bitmap(image);
             var filter =
                 new Crop(new Rectangle((int) (.04*imageX.Width), (int) (.228*imageX.Height), (int) (.625*imageX.Width),
-                    (int) (.626*imageX.Height)));
+                    (int) (.675*imageX.Height)));
             // apply the filter
             var newImage = filter.Apply(imageX);
             return newImage;
