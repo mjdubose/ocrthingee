@@ -142,7 +142,6 @@
       <DependentUpon>OCRThingee.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageAndRowList.cs" />
-    <Compile Include="InterfaceColumnsAndRows.cs" />
     <Compile Include="LockBitmap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -117,6 +117,8 @@ namespace OCRTHINGEE
             this.tradeitemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stationsTableAdapter = new OCRTHINGEE.testDataSet1TableAdapters.stationsTableAdapter();
             this.tradeitemsTableAdapter = new OCRTHINGEE.testDataSet3TableAdapters.tradeitemsTableAdapter();
+            this.CreditsTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabPage3.SuspendLayout();
             this.buttonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_OCRRows)).BeginInit();
@@ -180,7 +182,7 @@ namespace OCRTHINGEE
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage3.Size = new System.Drawing.Size(1335, 476);
+            this.tabPage3.Size = new System.Drawing.Size(1251, 476);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "OCR";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -211,7 +213,7 @@ namespace OCRTHINGEE
             this.buttonPanel.Controls.Add(this.btn_AddRowToDatabase);
             this.buttonPanel.Location = new System.Drawing.Point(810, 339);
             this.buttonPanel.Name = "buttonPanel";
-            this.buttonPanel.Size = new System.Drawing.Size(264, 129);
+            this.buttonPanel.Size = new System.Drawing.Size(283, 129);
             this.buttonPanel.TabIndex = 34;
             // 
             // button20
@@ -282,7 +284,7 @@ namespace OCRTHINGEE
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pb2.Location = new System.Drawing.Point(810, 261);
             this.pb2.Name = "pb2";
-            this.pb2.Size = new System.Drawing.Size(264, 72);
+            this.pb2.Size = new System.Drawing.Size(180, 72);
             this.pb2.TabIndex = 28;
             this.pb2.TabStop = false;
             // 
@@ -491,12 +493,14 @@ namespace OCRTHINGEE
             this.tabControl2.Location = new System.Drawing.Point(6, 12);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1343, 502);
+            this.tabControl2.Size = new System.Drawing.Size(1259, 502);
             this.tabControl2.TabIndex = 34;
             this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.CreditsTextBox);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.txtCargo);
@@ -510,7 +514,7 @@ namespace OCRTHINGEE
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1080, 476);
+            this.tabPage1.Size = new System.Drawing.Size(1183, 476);
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Market Searches";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -525,10 +529,10 @@ namespace OCRTHINGEE
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 116);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 74);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1068, 352);
+            this.dataGridView1.Size = new System.Drawing.Size(1032, 394);
             this.dataGridView1.TabIndex = 12;
             // 
             // label8
@@ -994,12 +998,29 @@ namespace OCRTHINGEE
             // 
             this.tradeitemsTableAdapter.ClearBeforeFill = true;
             // 
+            // CreditsTextBox
+            // 
+            this.CreditsTextBox.Location = new System.Drawing.Point(831, 19);
+            this.CreditsTextBox.Name = "CreditsTextBox";
+            this.CreditsTextBox.Size = new System.Drawing.Size(100, 20);
+            this.CreditsTextBox.TabIndex = 13;
+            this.CreditsTextBox.Text = "1000";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(786, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 13);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Credits";
+            // 
             // OCRThingee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1212, 514);
+            this.ClientSize = new System.Drawing.Size(1128, 514);
             this.Controls.Add(this.tabControl2);
             this.Name = "OCRThingee";
             this.Text = "Screen Ripper";
@@ -1131,6 +1152,8 @@ namespace OCRTHINGEE
         private DataGridViewTextBoxColumn sellpriceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn supplyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn lastupdateDataGridViewTextBoxColumn;
+        private Label label14;
+        private TextBox CreditsTextBox;
     }
 }
 
