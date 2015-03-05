@@ -785,8 +785,18 @@ namespace OCRTHINGEE
                 MessageBox.Show(@"Enter the number of cargo spaces in the ship.");
                 return;
             }
+
+            if (CreditsTextBox.Text == "")
+            {
+                MessageBox.Show(@"Enter the amount of credits you have.");
+            }
+
+
             int num;
             if (!int.TryParse(txtCargo.Text, out num)) return;
+
+            int credits;
+            if (!int.TryParse(CreditsTextBox.Text, out credits)) return;
 
             using (var elite = new elite_testingEntities())
             {
@@ -813,6 +823,8 @@ namespace OCRTHINGEE
                                              SellPrice = tradeitem.sellprice
                                          };
 
+               
+
 
                 var originatingstation = from station in elite.Stations
                                          join tradeitem in elite.Tradeitems on station.stationId equals tradeitem.stationid
@@ -836,7 +848,8 @@ namespace OCRTHINGEE
                 var profit = from t in originatingstation
                              join f in destinationstation
                                  on t.TradeitemId equals f.TradeitemId
-                             where t.BuyPrice < f.SellPrice
+                             where t.BuyPrice < f.SellPrice && (credits / t.BuyPrice > 0)
+                             let numberBought = (credits / t.BuyPrice) > num ? num : (credits / t.BuyPrice)
                              select new
                              {
                                  TradeitemID = f.TradeitemId,
@@ -846,7 +859,8 @@ namespace OCRTHINGEE
                                  t.Supply,
                                  t.BuyPrice,
                                  f.SellPrice,
-                                 Profit = (f.SellPrice - t.BuyPrice) * num
+                                 NumberBought = numberBought ,
+                                 Profit = (f.SellPrice - t.BuyPrice) * numberBought
                              };
 
                 var y = profit.ToList();
