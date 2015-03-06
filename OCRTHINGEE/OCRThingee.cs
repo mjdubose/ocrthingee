@@ -993,11 +993,5 @@ namespace OCRTHINGEE
             _showSystemName.DesktopLocation = new Point(l+100, t+ 100);
             
         }
-
-
-
-
-
-
     }
 }
