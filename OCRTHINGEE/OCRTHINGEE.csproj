@@ -134,6 +134,11 @@
   <ItemGroup>
     <Compile Include="ConsumerItemsList.cs" />
     <Compile Include="Coord.cs" />
+    <Compile Include="EliteDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EliteDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="OCRThingee.cs">
       <SubType>Form</SubType>
@@ -156,35 +161,6 @@
       <DependentUpon>ShowSystemName.cs</DependentUpon>
     </Compile>
     <Compile Include="station.cs" />
-    <Compile Include="testDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet2.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testDataSet3.cs">
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="testDataSet3.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testDataSet4.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet4.xsd</DependentUpon>
-    </Compile>
     <Compile Include="TradeProfitView.cs" />
     <EmbeddedResource Include="OCRThingee.resx">
       <DependentUpon>OCRThingee.cs</DependentUpon>
@@ -205,6 +181,17 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="EliteDataSet.xsc">
+      <DependentUpon>EliteDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="EliteDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EliteDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EliteDataSet.xss">
+      <DependentUpon>EliteDataSet.xsd</DependentUpon>
+    </None>
     <None Include="OCRTHINGEE_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -218,61 +205,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="testDataSet.xsc">
-      <DependentUpon>testDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="testDataSet.xss">
-      <DependentUpon>testDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet1.xsc">
-      <DependentUpon>testDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="testDataSet1.xss">
-      <DependentUpon>testDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet2.xsc">
-      <DependentUpon>testDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="testDataSet2.xss">
-      <DependentUpon>testDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet3.xsc">
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet3.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet3.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="testDataSet3.xss">
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet4.xsc">
-      <DependentUpon>testDataSet4.xsd</DependentUpon>
-    </None>
-    <None Include="testDataSet4.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet4.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="testDataSet4.xss">
-      <DependentUpon>testDataSet4.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="AForge.dll">

@@ -507,15 +507,18 @@ namespace OCRTHINGEE
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            tradeitemsTableAdapter.Fill(testDataSet3.tradeitems);
-
-
-            itemsTableAdapter.Fill(testDataSet2.items);
-
-            stationsTableAdapter.Fill(testDataSet1.stations);
-
-            systemsTableAdapter.Fill(testDataSet.systems);
+            
+            tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
+           
+            stationsTableAdapter.Fill(eliteDataSet.stations);
+           
+            systemsTableAdapter.Fill(eliteDataSet.systems);
+          
+            itemsTableAdapter.Fill(eliteDataSet.items);
+           
+            
             _showSystemName = new ShowSystemName();
+          
             
 
         }
@@ -725,7 +728,7 @@ namespace OCRTHINGEE
             else
                 if (tabControl2.SelectedTab == tabControl2.TabPages["TabPage2"])
                 {
-                    systemsTableAdapter.Fill(testDataSet.systems);
+                    
                 }
 
         }
@@ -881,15 +884,15 @@ namespace OCRTHINGEE
 
             var selectedRow = dataGridView2.Rows[selectedrowindex];
 
-            var a = Convert.ToInt32(selectedRow.Cells[0].Value);
+           var a = Convert.ToInt32(selectedRow.Cells[0].Value);
 
-            stationsTableAdapter.FillByID(testDataSet1.stations, a);
+            stationsTableAdapter.FillByID(eliteDataSet.stations, a);
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            systemsTableAdapter.Update(testDataSet.systems);
+            systemsTableAdapter.Update(eliteDataSet.systems);
 
         }
 
@@ -902,7 +905,7 @@ namespace OCRTHINGEE
 
             var a = Convert.ToInt32(selectedRow.Cells[0].Value);
             systemsTableAdapter.Delete(a);
-            systemsTableAdapter.Fill(testDataSet.systems);
+           systemsTableAdapter.Fill(eliteDataSet.systems);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -915,12 +918,12 @@ namespace OCRTHINGEE
             var a = Convert.ToInt32(selectedRow.Cells[0].Value);
             var b = Convert.ToInt32(selectedRow.Cells[1].Value);
             stationsTableAdapter.Delete(a, b);
-            stationsTableAdapter.Fill(testDataSet1.stations);
+            stationsTableAdapter.Fill(eliteDataSet.stations);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            stationsTableAdapter.Update(testDataSet1.stations);
+           stationsTableAdapter.Update(eliteDataSet.stations);
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -933,12 +936,12 @@ namespace OCRTHINGEE
             var a = Convert.ToInt32(selectedRow.Cells[0].Value);
 
             itemsTableAdapter.Delete(a);
-            itemsTableAdapter.Fill(testDataSet2.items);
+            itemsTableAdapter.Fill(eliteDataSet.items);
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            itemsTableAdapter.Update(testDataSet2.items);
+           itemsTableAdapter.Update(eliteDataSet.items);
         }
 
         private void button9_Click_1(object sender, EventArgs e)
@@ -948,15 +951,15 @@ namespace OCRTHINGEE
 
             var selectedRow = dataGridView5.Rows[selectedrowindex];
 
-            var a = Convert.ToInt32(selectedRow.Cells[0].Value);
 
-            tradeitemsTableAdapter.DeleteById(a);
-            tradeitemsTableAdapter.Fill(testDataSet3.tradeitems);
+
+            tradeitemsTableAdapter.Delete(Convert.ToInt32(selectedRow.Cells[0].Value), Convert.ToInt32(selectedRow.Cells[1].Value), Convert.ToInt32(selectedRow.Cells[2].Value), selectedRow.Cells[3].Value as int?, selectedRow.Cells[4].Value as int?, selectedRow.Cells[5].Value as int?, selectedRow.Cells[6].Value as DateTime?);
+            tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
         }
 
         private void button10_Click_1(object sender, EventArgs e)
         {
-            tradeitemsTableAdapter.Update(testDataSet3.tradeitems);
+            tradeitemsTableAdapter.Update(eliteDataSet.tradeitems);
 
         }
 
@@ -969,7 +972,7 @@ namespace OCRTHINGEE
 
             var a = Convert.ToInt32(selectedRow.Cells[0].Value);
 
-            tradeitemsTableAdapter.FillByStationID(testDataSet3.tradeitems, a);
+            tradeitemsTableAdapter.FillByStationID1(eliteDataSet.tradeitems, a);
         }
 
         private void Form1_Move(object sender, EventArgs e)
@@ -983,5 +986,21 @@ namespace OCRTHINGEE
             _showSystemName.DesktopLocation = new Point(l+100, t+ 100);
             
         }
+
+        private void eliteDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void systemsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
+
+      
+
+      
     }
 }
