@@ -62,6 +62,8 @@ namespace OCRTHINGEE
             this.button14 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.CreditsTextBox = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.txtCargo = new System.Windows.Forms.TextBox();
@@ -117,8 +119,7 @@ namespace OCRTHINGEE
             this.tradeitemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stationsTableAdapter = new OCRTHINGEE.testDataSet1TableAdapters.stationsTableAdapter();
             this.tradeitemsTableAdapter = new OCRTHINGEE.testDataSet3TableAdapters.tradeitemsTableAdapter();
-            this.CreditsTextBox = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.tabPage3.SuspendLayout();
             this.buttonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_OCRRows)).BeginInit();
@@ -181,7 +182,7 @@ namespace OCRTHINGEE
             this.tabPage3.Controls.Add(this.button14);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(1251, 476);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "OCR";
@@ -499,6 +500,7 @@ namespace OCRTHINGEE
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox3);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.CreditsTextBox);
             this.tabPage1.Controls.Add(this.dataGridView1);
@@ -513,11 +515,28 @@ namespace OCRTHINGEE
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1183, 476);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1251, 476);
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Market Searches";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(786, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 13);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Credits";
+            // 
+            // CreditsTextBox
+            // 
+            this.CreditsTextBox.Location = new System.Drawing.Point(831, 19);
+            this.CreditsTextBox.Name = "CreditsTextBox";
+            this.CreditsTextBox.Size = new System.Drawing.Size(100, 20);
+            this.CreditsTextBox.TabIndex = 13;
+            this.CreditsTextBox.Text = "1000";
             // 
             // dataGridView1
             // 
@@ -650,8 +669,8 @@ namespace OCRTHINGEE
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1080, 476);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1251, 476);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Database CRUD";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -998,22 +1017,13 @@ namespace OCRTHINGEE
             // 
             this.tradeitemsTableAdapter.ClearBeforeFill = true;
             // 
-            // CreditsTextBox
+            // comboBox3
             // 
-            this.CreditsTextBox.Location = new System.Drawing.Point(831, 19);
-            this.CreditsTextBox.Name = "CreditsTextBox";
-            this.CreditsTextBox.Size = new System.Drawing.Size(100, 20);
-            this.CreditsTextBox.TabIndex = 13;
-            this.CreditsTextBox.Text = "1000";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(786, 22);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 13);
-            this.label14.TabIndex = 14;
-            this.label14.Text = "Credits";
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(258, 41);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 15;
             // 
             // OCRThingee
             // 
@@ -1154,6 +1164,7 @@ namespace OCRTHINGEE
         private DataGridViewTextBoxColumn lastupdateDataGridViewTextBoxColumn;
         private Label label14;
         private TextBox CreditsTextBox;
+        private ComboBox comboBox3;
     }
 }
 

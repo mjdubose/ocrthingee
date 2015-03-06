@@ -516,6 +516,16 @@ namespace OCRTHINGEE
 
             systemsTableAdapter.Fill(testDataSet.systems);
             _showSystemName = new ShowSystemName();
+            using (var elite = new elite_testingEntities())
+            {
+               var systemsbindingsource = new BindingSource();
+                var systemlist = from system in elite.Systems
+                    select new {SystemId = system.sysId, SysName = system.name};
+                systemsbindingsource.DataSource = systemlist.ToList();
+                comboBox3.DataSource = systemsbindingsource;
+                comboBox3.DisplayMember = "SysName";
+                comboBox3.ValueMember = "SystemId";
+            }
             
 
         }
