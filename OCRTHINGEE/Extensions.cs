@@ -42,7 +42,7 @@ namespace OCRTHINGEE
 
         public static Bitmap Crop(this Image image)
         {
-            var imageX = new Bitmap(image);
+            var imageX = (image as Bitmap).Clone(0,0,image.Width,image.Height);
             var filter =
                 new Crop(new Rectangle((int) (.04*imageX.Width), (int) (.228*imageX.Height), (int) (.625*imageX.Width),
                     (int) (.675*imageX.Height)));
@@ -106,7 +106,7 @@ namespace OCRTHINGEE
         public static Bitmap ResizeBmp(this Bitmap bmp)
         {
             var b0 = bmp;
-            const double scale = 406/96;
+            const double scale = 4.229166666666667;
             if (b0 == null) return null;
             if (b0.Height >= 20) return bmp;
             var width = (int) (b0.Width*scale);
@@ -201,8 +201,9 @@ namespace OCRTHINGEE
             return nImage;
         }
 
-        public static Bitmap ClearHorizontalBars(Bitmap image)
+        public static Bitmap ClearHorizontalBars(Bitmap imageoriginal)
         {
+            var image = imageoriginal.Clone(0, 0, imageoriginal.Width, imageoriginal.Height);
             var vert = 0;
             while (vert < image.Height)
             {

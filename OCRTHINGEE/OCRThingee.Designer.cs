@@ -853,7 +853,7 @@ namespace OCRTHINGEE
             // 
             this.systemsBindingSource.DataMember = "systems";
             this.systemsBindingSource.DataSource = this.eliteDataSetBindingSource;
-            this.systemsBindingSource.CurrentChanged += new System.EventHandler(this.systemsBindingSource_CurrentChanged);
+         
             // 
             // stationsBindingSource
             // 
@@ -920,7 +920,6 @@ namespace OCRTHINGEE
             // 
             this.eliteDataSetBindingSource.DataSource = this.eliteDataSet;
             this.eliteDataSetBindingSource.Position = 0;
-            this.eliteDataSetBindingSource.CurrentChanged += new System.EventHandler(this.eliteDataSetBindingSource_CurrentChanged);
             // 
             // eliteDataSet
             // 
@@ -996,7 +995,6 @@ namespace OCRTHINGEE
             this.Controls.Add(this.tabControl2);
             this.Name = "OCRThingee";
             this.Text = "Screen Ripper";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Move += new System.EventHandler(this.Form1_Move);
             this.tabPage3.ResumeLayout(false);

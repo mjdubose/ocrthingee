@@ -78,16 +78,23 @@ namespace OCRTHINGEE
 
         private void button3_Click(object sender, EventArgs e)
         {
-            pb1.Image = pb1.Image.Invert();
+            if (_path != null)
+            {
+                pb1.Image = pb1.Image.Invert();
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            pb1.Image = pb1.Image.Crop();
+            if (_path != null)
+            {
+                pb1.Image = pb1.Image.Crop();
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            if (_path == null) return;
             _rowholder.Clear();
             pb1.Image = pb1.Image.DefineRowsForImageRipping(_rowholder);
         }
@@ -114,19 +121,14 @@ namespace OCRTHINGEE
                         {
                             for (var horclear = 0; horclear < image.Width; horclear++)
                             {
-                                if (vert + dotwice < 0)
+                                if (vert + dotwice < 0) continue;
+                                if (vert + dotwice > image.Height - 1)
                                 {
+                                    temp.SetPixel(horclear, vert, Color.White);
+                                    dotwice = 3;
                                 }
                                 else
-                                {
-                                    if (vert + dotwice > image.Height - 1)
-                                    {
-                                        temp.SetPixel(horclear, vert, Color.White);
-                                        dotwice = 3;
-                                    }
-                                    else
-                                        temp.SetPixel(horclear, vert + dotwice, Color.White);
-                                }
+                                    temp.SetPixel(horclear, vert + dotwice, Color.White);
                             }
                         }
                     }
@@ -151,7 +153,31 @@ namespace OCRTHINGEE
             button17.Enabled = false;
 
             btn_AddRowToDatabase.Enabled = false;
-            if (!GetSystemName())
+            try
+            {
+                if (!GetSystemName()) return;
+                var temp = (pb1.Image as Bitmap).Clone(0, 0, pb1.Image.Width, pb1.Image.Height);
+                var task = PrepareForOcrAsync(temp, r1.Value, r2.Value, g1.Value, g2.Value, b1.Value, b2.Value);
+                var picture = await task;
+                _rowholder.Clear();
+                var task2 = DefineRowsForImageRippingAsync(picture, _rowholder);
+                var imageandrowlistresults = await task2;
+                _rowholder = imageandrowlistresults.listrow;
+                var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image,
+                    imageandrowlistresults.listrow);
+                _currentTextValues = await task3;
+                pb1.Image = picture;
+                PopulateDataGridView();
+                tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
+                stationsTableAdapter.Fill(eliteDataSet.stations);
+                systemsTableAdapter.Fill(eliteDataSet.systems);
+                itemsTableAdapter.Fill(eliteDataSet.items);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
             {
                 button1.Enabled = true;
                 button2.Enabled = true;
@@ -162,32 +188,7 @@ namespace OCRTHINGEE
                 button16.Enabled = true;
                 button17.Enabled = true;
                 btn_AddRowToDatabase.Enabled = true;
-
-
-                return;
             }
-
-            var task = PrepareForOcrAsync(pb1.Image, r1.Value, r2.Value, g1.Value, g2.Value, b1.Value, b2.Value);
-            var picture = await task;
-            pb1.Image = picture;
-            _rowholder.Clear();
-            var task2 = DefineRowsForImageRippingAsync(picture, _rowholder);
-
-            var imageandrowlistresults = await task2;
-            _rowholder = imageandrowlistresults.listrow;
-            var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image, imageandrowlistresults.listrow);
-            _currentTextValues = await task3;
-            pb1.Image = picture;
-            PopulateDataGridView();
-            button1.Enabled = true;
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button14.Enabled = true;
-            button16.Enabled = true;
-            button17.Enabled = true;
-            btn_AddRowToDatabase.Enabled = true;
         }
 
         private static Task<Image> PrepareForOcrAsync(Image imageToBeCleaned, decimal r1, decimal r2, decimal g1,
@@ -284,8 +285,8 @@ namespace OCRTHINGEE
             var source = new Bitmap(pb1.Image);
 
             var systemName = source.Clone(54 * source.Height / 900, 61 * source.Width / 1600, 340 * source.Width / 1600,
-                78 * source.Height / 900 - 54 * source.Height / 900);
-            systemName = systemName.ResizeBmp();
+                78 * source.Height / 900 - 54 * source.Height / 900).ResizeBmp();
+           
             systemName.Save(@"c:\ocrtest\SystemName.Tiff", ImageFormat.Tiff);
             Stationname = OcrTesseract(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
@@ -308,12 +309,11 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            foreach (
-                var x in
-                    _currentTextValues.Where(
-                        x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumCargo != "") || (x.NumSupply != "") ||
-                             (x.TextSupply != "") || (x.GalacticAverage != "")))
+            for (int index = 0; index < _currentTextValues.Count; index++)
             {
+                var x = _currentTextValues[index];
+                if ((x.SellPrice == "") && (x.BuyPrice == "") && (x.NumCargo == "") && (x.NumSupply == "") &&
+                    (x.TextSupply == "") && (x.GalacticAverage == "")) continue;
                 GridviewDisplayedDataCleanUp(x, productlist);
                 dg_OCRRows.Rows.Add(MakeNewDataGridViewRow(x));
             }
@@ -427,8 +427,9 @@ namespace OCRTHINGEE
                         .ResizeBmp()
             }).ToList();
 
-            foreach (var temp in rowbmpholder)
+            for (int index = 0; index < rowbmpholder.Count; index++)
             {
+                var temp = rowbmpholder[index];
                 var tesseract = new RowAsText();
 
                 temp.GoodsName.Save(@"c:\ocrtest\GoodsName.Tiff", ImageFormat.Tiff);
@@ -468,7 +469,7 @@ namespace OCRTHINGEE
 
         private static string OcrTesseract(string testImagePath)
         {
-            using (var engine = new TesseractEngine(@"./tessdata", "small", EngineMode.Default))
+            using (var engine = new TesseractEngine(@"./tessdata", "small", EngineMode.TesseractOnly))
             {
                 using (var img = Pix.LoadFromFile(testImagePath))
                 {
@@ -495,8 +496,9 @@ namespace OCRTHINGEE
         {
             do
             {
-                foreach (DataGridViewRow row in dg_OCRRows.Rows)
+                for (int index = 0; index < dg_OCRRows.Rows.Count; index++)
                 {
+                    DataGridViewRow row = dg_OCRRows.Rows[index];
                     dg_OCRRows.Rows.Remove(row);
                 }
             } while (dg_OCRRows.Rows.Count > 1);
@@ -549,7 +551,8 @@ namespace OCRTHINGEE
                     cloned.Columns[7].Name = "TextSupply";
                     cloned.Columns[8].Name = "GalacticAverage";
 
-                    foreach (var y in from DataGridViewRow y in dg_OCRRows.Rows where y.Cells[2].Value.ToString() != "" select y)
+                    foreach (var y in
+                        dg_OCRRows.Rows.Cast<DataGridViewRow>().Where(y => y.Cells[2].Value.ToString() != ""))
                     {
                         cloned.Rows.Add(CloneWithValues(y));
                     }
@@ -577,8 +580,9 @@ namespace OCRTHINGEE
         {
             var thissystem = elite.Systems.ToList();
 
-            foreach (DataGridViewRow y in thegrid.Rows)
+            for (int index = 0; index < thegrid.Rows.Count; index++)
             {
+                DataGridViewRow y = thegrid.Rows[index];
                 if (y.Cells[0].FormattedValue == null) continue;
                 if (string.IsNullOrEmpty(y.Cells[0].FormattedValue.ToString())) continue;
                 if (y.Cells[1].FormattedValue == null) continue;
@@ -607,7 +611,7 @@ namespace OCRTHINGEE
 
                 if (thesystem == null)
                 {
-                    elite.Systems.Add(new system { name = system });
+                    elite.Systems.Add(new system {name = system});
                     elite.SaveChanges();
                     thissystem = elite.Systems.ToList();
 
@@ -630,7 +634,7 @@ namespace OCRTHINGEE
 
                 if (thestation == null)
                 {
-                    elite.Stations.Add(new station { name = station, sysid = thesystem.sysId });
+                    elite.Stations.Add(new station {name = station, sysid = thesystem.sysId});
 
                     elite.SaveChanges();
 
@@ -642,7 +646,7 @@ namespace OCRTHINGEE
                 var thisgood = goodslist.Find(s => s.name == goodsname);
                 if (thisgood == null)
                 {
-                    elite.Items.Add(new item { name = goodsname });
+                    elite.Items.Add(new item {name = goodsname});
                     elite.SaveChanges();
                     goodslist = elite.Items.ToList();
                     thisgood = goodslist.Find(s => s.name == goodsname);
@@ -733,9 +737,7 @@ namespace OCRTHINGEE
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
+       
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -986,21 +988,5 @@ namespace OCRTHINGEE
             _showSystemName.DesktopLocation = new Point(l+100, t+ 100);
             
         }
-
-        private void eliteDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void systemsBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
-      
-
-      
     }
 }
