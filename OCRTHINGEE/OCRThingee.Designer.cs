@@ -32,6 +32,7 @@ namespace OCRTHINGEE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,26 +77,6 @@ namespace OCRTHINGEE
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.label13 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.systemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tradeitemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sysId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stationidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,18 +84,38 @@ namespace OCRTHINGEE
             this.sellpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastupdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tradeitemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eliteDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eliteDataSet = new OCRTHINGEE.EliteDataSet();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.itemIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.stationIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sysidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.sysId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.systemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemsTableAdapter = new OCRTHINGEE.EliteDataSetTableAdapters.itemsTableAdapter();
             this.systemsTableAdapter = new OCRTHINGEE.EliteDataSetTableAdapters.systemsTableAdapter();
             this.stationsTableAdapter = new OCRTHINGEE.EliteDataSetTableAdapters.stationsTableAdapter();
             this.tradeitemsTableAdapter = new OCRTHINGEE.EliteDataSetTableAdapters.tradeitemsTableAdapter();
-            this.itemIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3.SuspendLayout();
             this.buttonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_OCRRows)).BeginInit();
@@ -131,15 +132,15 @@ namespace OCRTHINGEE
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.systemsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stationsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tradeitemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eliteDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eliteDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stationsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.systemsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -538,8 +539,19 @@ namespace OCRTHINGEE
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(6, 74);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Eurostile", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(1032, 394);
             this.dataGridView1.TabIndex = 12;
@@ -573,6 +585,7 @@ namespace OCRTHINGEE
             // 
             // comboBox4
             // 
+            this.comboBox4.DisplayMember = "sysId";
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(50, 47);
             this.comboBox4.Name = "comboBox4";
@@ -599,6 +612,7 @@ namespace OCRTHINGEE
             // 
             // comboBox1
             // 
+            this.comboBox1.DisplayMember = "sysId";
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(50, 20);
             this.comboBox1.Name = "comboBox1";
@@ -672,6 +686,64 @@ namespace OCRTHINGEE
             this.dataGridView5.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView5.Size = new System.Drawing.Size(747, 150);
             this.dataGridView5.TabIndex = 20;
+            // 
+            // productsIdDataGridViewTextBoxColumn
+            // 
+            this.productsIdDataGridViewTextBoxColumn.DataPropertyName = "ProductsId";
+            this.productsIdDataGridViewTextBoxColumn.HeaderText = "ProductsId";
+            this.productsIdDataGridViewTextBoxColumn.Name = "productsIdDataGridViewTextBoxColumn";
+            this.productsIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // stationidDataGridViewTextBoxColumn1
+            // 
+            this.stationidDataGridViewTextBoxColumn1.DataPropertyName = "stationid";
+            this.stationidDataGridViewTextBoxColumn1.HeaderText = "stationid";
+            this.stationidDataGridViewTextBoxColumn1.Name = "stationidDataGridViewTextBoxColumn1";
+            // 
+            // itemidDataGridViewTextBoxColumn1
+            // 
+            this.itemidDataGridViewTextBoxColumn1.DataPropertyName = "itemid";
+            this.itemidDataGridViewTextBoxColumn1.HeaderText = "itemid";
+            this.itemidDataGridViewTextBoxColumn1.Name = "itemidDataGridViewTextBoxColumn1";
+            // 
+            // buypriceDataGridViewTextBoxColumn
+            // 
+            this.buypriceDataGridViewTextBoxColumn.DataPropertyName = "buyprice";
+            this.buypriceDataGridViewTextBoxColumn.HeaderText = "buyprice";
+            this.buypriceDataGridViewTextBoxColumn.Name = "buypriceDataGridViewTextBoxColumn";
+            // 
+            // sellpriceDataGridViewTextBoxColumn
+            // 
+            this.sellpriceDataGridViewTextBoxColumn.DataPropertyName = "sellprice";
+            this.sellpriceDataGridViewTextBoxColumn.HeaderText = "sellprice";
+            this.sellpriceDataGridViewTextBoxColumn.Name = "sellpriceDataGridViewTextBoxColumn";
+            // 
+            // supplyDataGridViewTextBoxColumn
+            // 
+            this.supplyDataGridViewTextBoxColumn.DataPropertyName = "supply";
+            this.supplyDataGridViewTextBoxColumn.HeaderText = "supply";
+            this.supplyDataGridViewTextBoxColumn.Name = "supplyDataGridViewTextBoxColumn";
+            // 
+            // lastupdateDataGridViewTextBoxColumn
+            // 
+            this.lastupdateDataGridViewTextBoxColumn.DataPropertyName = "lastupdate";
+            this.lastupdateDataGridViewTextBoxColumn.HeaderText = "lastupdate";
+            this.lastupdateDataGridViewTextBoxColumn.Name = "lastupdateDataGridViewTextBoxColumn";
+            // 
+            // tradeitemsBindingSource
+            // 
+            this.tradeitemsBindingSource.DataMember = "tradeitems";
+            this.tradeitemsBindingSource.DataSource = this.eliteDataSetBindingSource;
+            // 
+            // eliteDataSetBindingSource
+            // 
+            this.eliteDataSetBindingSource.DataSource = this.eliteDataSet;
+            this.eliteDataSetBindingSource.Position = 0;
+            // 
+            // eliteDataSet
+            // 
+            this.eliteDataSet.DataSetName = "EliteDataSet";
+            this.eliteDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label13
             // 
@@ -752,6 +824,26 @@ namespace OCRTHINGEE
             this.dataGridView4.Size = new System.Drawing.Size(305, 150);
             this.dataGridView4.TabIndex = 12;
             // 
+            // itemIdDataGridViewTextBoxColumn
+            // 
+            this.itemIdDataGridViewTextBoxColumn.DataPropertyName = "itemId";
+            this.itemIdDataGridViewTextBoxColumn.HeaderText = "itemId";
+            this.itemIdDataGridViewTextBoxColumn.Name = "itemIdDataGridViewTextBoxColumn";
+            this.itemIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.itemIdDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // nameDataGridViewTextBoxColumn2
+            // 
+            this.nameDataGridViewTextBoxColumn2.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn2.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
+            this.nameDataGridViewTextBoxColumn2.Width = 58;
+            // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataMember = "items";
+            this.itemsBindingSource.DataSource = this.eliteDataSetBindingSource;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -808,6 +900,33 @@ namespace OCRTHINGEE
             this.dataGridView3.TabIndex = 7;
             this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
             // 
+            // stationIdDataGridViewTextBoxColumn
+            // 
+            this.stationIdDataGridViewTextBoxColumn.DataPropertyName = "stationId";
+            this.stationIdDataGridViewTextBoxColumn.HeaderText = "stationId";
+            this.stationIdDataGridViewTextBoxColumn.Name = "stationIdDataGridViewTextBoxColumn";
+            this.stationIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.stationIdDataGridViewTextBoxColumn.Width = 72;
+            // 
+            // sysidDataGridViewTextBoxColumn
+            // 
+            this.sysidDataGridViewTextBoxColumn.DataPropertyName = "sysid";
+            this.sysidDataGridViewTextBoxColumn.HeaderText = "sysid";
+            this.sysidDataGridViewTextBoxColumn.Name = "sysidDataGridViewTextBoxColumn";
+            this.sysidDataGridViewTextBoxColumn.Width = 55;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.Width = 58;
+            // 
+            // stationsBindingSource
+            // 
+            this.stationsBindingSource.DataMember = "stations";
+            this.stationsBindingSource.DataSource = this.eliteDataSetBindingSource;
+            // 
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(163, 208);
@@ -844,27 +963,6 @@ namespace OCRTHINGEE
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // itemsBindingSource
-            // 
-            this.itemsBindingSource.DataMember = "items";
-            this.itemsBindingSource.DataSource = this.eliteDataSetBindingSource;
-            // 
-            // systemsBindingSource
-            // 
-            this.systemsBindingSource.DataMember = "systems";
-            this.systemsBindingSource.DataSource = this.eliteDataSetBindingSource;
-         
-            // 
-            // stationsBindingSource
-            // 
-            this.stationsBindingSource.DataMember = "stations";
-            this.stationsBindingSource.DataSource = this.eliteDataSetBindingSource;
-            // 
-            // tradeitemsBindingSource
-            // 
-            this.tradeitemsBindingSource.DataMember = "tradeitems";
-            this.tradeitemsBindingSource.DataSource = this.eliteDataSetBindingSource;
-            // 
             // sysId
             // 
             this.sysId.DataPropertyName = "sysId";
@@ -873,87 +971,17 @@ namespace OCRTHINGEE
             this.sysId.ReadOnly = true;
             this.sysId.Width = 56;
             // 
-            // productsIdDataGridViewTextBoxColumn
-            // 
-            this.productsIdDataGridViewTextBoxColumn.DataPropertyName = "ProductsId";
-            this.productsIdDataGridViewTextBoxColumn.HeaderText = "ProductsId";
-            this.productsIdDataGridViewTextBoxColumn.Name = "productsIdDataGridViewTextBoxColumn";
-            this.productsIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // stationidDataGridViewTextBoxColumn1
-            // 
-            this.stationidDataGridViewTextBoxColumn1.DataPropertyName = "stationid";
-            this.stationidDataGridViewTextBoxColumn1.HeaderText = "stationid";
-            this.stationidDataGridViewTextBoxColumn1.Name = "stationidDataGridViewTextBoxColumn1";
-            // 
-            // itemidDataGridViewTextBoxColumn1
-            // 
-            this.itemidDataGridViewTextBoxColumn1.DataPropertyName = "itemid";
-            this.itemidDataGridViewTextBoxColumn1.HeaderText = "itemid";
-            this.itemidDataGridViewTextBoxColumn1.Name = "itemidDataGridViewTextBoxColumn1";
-            // 
-            // buypriceDataGridViewTextBoxColumn
-            // 
-            this.buypriceDataGridViewTextBoxColumn.DataPropertyName = "buyprice";
-            this.buypriceDataGridViewTextBoxColumn.HeaderText = "buyprice";
-            this.buypriceDataGridViewTextBoxColumn.Name = "buypriceDataGridViewTextBoxColumn";
-            // 
-            // sellpriceDataGridViewTextBoxColumn
-            // 
-            this.sellpriceDataGridViewTextBoxColumn.DataPropertyName = "sellprice";
-            this.sellpriceDataGridViewTextBoxColumn.HeaderText = "sellprice";
-            this.sellpriceDataGridViewTextBoxColumn.Name = "sellpriceDataGridViewTextBoxColumn";
-            // 
-            // supplyDataGridViewTextBoxColumn
-            // 
-            this.supplyDataGridViewTextBoxColumn.DataPropertyName = "supply";
-            this.supplyDataGridViewTextBoxColumn.HeaderText = "supply";
-            this.supplyDataGridViewTextBoxColumn.Name = "supplyDataGridViewTextBoxColumn";
-            // 
-            // lastupdateDataGridViewTextBoxColumn
-            // 
-            this.lastupdateDataGridViewTextBoxColumn.DataPropertyName = "lastupdate";
-            this.lastupdateDataGridViewTextBoxColumn.HeaderText = "lastupdate";
-            this.lastupdateDataGridViewTextBoxColumn.Name = "lastupdateDataGridViewTextBoxColumn";
-            // 
-            // eliteDataSetBindingSource
-            // 
-            this.eliteDataSetBindingSource.DataSource = this.eliteDataSet;
-            this.eliteDataSetBindingSource.Position = 0;
-            // 
-            // eliteDataSet
-            // 
-            this.eliteDataSet.DataSetName = "EliteDataSet";
-            this.eliteDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // stationIdDataGridViewTextBoxColumn
-            // 
-            this.stationIdDataGridViewTextBoxColumn.DataPropertyName = "stationId";
-            this.stationIdDataGridViewTextBoxColumn.HeaderText = "stationId";
-            this.stationIdDataGridViewTextBoxColumn.Name = "stationIdDataGridViewTextBoxColumn";
-            this.stationIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.stationIdDataGridViewTextBoxColumn.Width = 72;
-            // 
-            // sysidDataGridViewTextBoxColumn
-            // 
-            this.sysidDataGridViewTextBoxColumn.DataPropertyName = "sysid";
-            this.sysidDataGridViewTextBoxColumn.HeaderText = "sysid";
-            this.sysidDataGridViewTextBoxColumn.Name = "sysidDataGridViewTextBoxColumn";
-            this.sysidDataGridViewTextBoxColumn.Width = 55;
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "name";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.Width = 58;
-            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.Width = 58;
+            // 
+            // systemsBindingSource
+            // 
+            this.systemsBindingSource.DataMember = "systems";
+            this.systemsBindingSource.DataSource = this.eliteDataSetBindingSource;
             // 
             // itemsTableAdapter
             // 
@@ -970,21 +998,6 @@ namespace OCRTHINGEE
             // tradeitemsTableAdapter
             // 
             this.tradeitemsTableAdapter.ClearBeforeFill = true;
-            // 
-            // itemIdDataGridViewTextBoxColumn
-            // 
-            this.itemIdDataGridViewTextBoxColumn.DataPropertyName = "itemId";
-            this.itemIdDataGridViewTextBoxColumn.HeaderText = "itemId";
-            this.itemIdDataGridViewTextBoxColumn.Name = "itemIdDataGridViewTextBoxColumn";
-            this.itemIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.itemIdDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // nameDataGridViewTextBoxColumn2
-            // 
-            this.nameDataGridViewTextBoxColumn2.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn2.HeaderText = "name";
-            this.nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
-            this.nameDataGridViewTextBoxColumn2.Width = 58;
             // 
             // OCRThingee
             // 
@@ -1016,15 +1029,15 @@ namespace OCRTHINGEE
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.systemsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stationsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tradeitemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eliteDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eliteDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stationsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.systemsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -168,6 +168,7 @@ namespace OCRTHINGEE
                 _currentTextValues = await task3;
                 pb1.Image = picture;
                 PopulateDataGridView();
+                dg_OCRRows.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
                 tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
                 stationsTableAdapter.Fill(eliteDataSet.stations);
                 systemsTableAdapter.Fill(eliteDataSet.systems);
@@ -300,8 +301,9 @@ namespace OCRTHINGEE
             dg_OCRRows.DataSource = null;
             dg_OCRRows.Rows.Clear();
             dg_OCRRows.Refresh();
-            AddDataGridViewColumns();
 
+            AddDataGridViewColumns();
+           
             var productlist = new ConsumerItemsList();
 
             RemoveRowsWithNoValidEntries(productlist);
@@ -354,8 +356,10 @@ namespace OCRTHINGEE
             row.CreateCells(dg_OCRRows, Systemname, Stationname, x.GoodsName, x.SellPrice, x.BuyPrice, x.NumCargo,
                 x.NumSupply,
                 x.TextSupply, x.GalacticAverage);
-            row.DefaultCellStyle.BackColor = Color.LightGreen;
-            row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
+            row.DefaultCellStyle.BackColor = Color.Black;
+            row.DefaultCellStyle.ForeColor = Color.Orange;
+            row.DefaultCellStyle.Font = new Font("Eurostile", 10,FontStyle.Bold);
+            row.DefaultCellStyle.SelectionBackColor = Color.Red;
             return row;
         }
 
