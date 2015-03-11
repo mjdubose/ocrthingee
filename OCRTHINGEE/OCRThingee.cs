@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
+using System.Drawing.Text;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
@@ -517,14 +518,10 @@ namespace OCRTHINGEE
 
             dg_OCRRows.Refresh();
         }
-        [DllImport("gdi32.dll", EntryPoint = "AddFontResourceW", SetLastError = true)]
-        public static extern int AddFontResource(
-            [In][MarshalAs(UnmanagedType.LPWStr)]
-        string lpFileName);
+      
         private void Form1_Load(object sender, EventArgs e)
         {
-            var applicationpath = Application.StartupPath;
-
+          
 
             const string fontName = "Eurostile";
             const float fontSize = 12;
@@ -537,12 +534,8 @@ namespace OCRTHINGEE
             {
                 if (fontTester.Name != fontName)
                 {
-                    AddFontResource(applicationpath + @"\EUROSTILE.TTF");
-                    var error = Marshal.GetLastWin32Error();
-                    if (error != 0)
-                    {
-                        MessageBox.Show(new Win32Exception(error).Message);
-                    }
+                    this.Font = new Font("Times New Roman", 16.0f,
+                  FontStyle.Regular, GraphicsUnit.Pixel);
                 }
 
             }
