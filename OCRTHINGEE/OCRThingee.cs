@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
@@ -22,12 +24,12 @@ namespace OCRTHINGEE
         private readonly AutoCompleteStringCollection _stationsource = new AutoCompleteStringCollection();
         private readonly List<string> _systemcollectionstrings = new List<string>();
         ShowSystemName _showSystemName;
-      
+
 
         public OCRThingee()
         {
             InitializeComponent();
-       
+
 
         }
 
@@ -166,8 +168,9 @@ namespace OCRTHINGEE
                 var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image,
                     imageandrowlistresults.listrow);
                 _currentTextValues = await task3;
-                pb1.Image = picture;
+                pb1.Image = pb1.Image.Crop();
                 PopulateDataGridView();
+                dg_OCRRows.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
                 tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
                 stationsTableAdapter.Fill(eliteDataSet.stations);
                 systemsTableAdapter.Fill(eliteDataSet.systems);
@@ -286,12 +289,17 @@ namespace OCRTHINGEE
 
             var systemName = source.Clone(54 * source.Height / 900, 61 * source.Width / 1600, 340 * source.Width / 1600,
                 78 * source.Height / 900 - 54 * source.Height / 900).ResizeBmp();
-           
+
             systemName.Save(@"c:\ocrtest\SystemName.Tiff", ImageFormat.Tiff);
             Stationname = OcrTesseract(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
             pb2.Image = systemName;
-          
+
+
+            var t = Top;
+            var l = Left;
+            _showSystemName.DesktopLocation = new Point(l + 100, t + 100);
+
             return _showSystemName.ShowDialog() == DialogResult.OK;
         }
 
@@ -300,6 +308,7 @@ namespace OCRTHINGEE
             dg_OCRRows.DataSource = null;
             dg_OCRRows.Rows.Clear();
             dg_OCRRows.Refresh();
+
             AddDataGridViewColumns();
 
             var productlist = new ConsumerItemsList();
@@ -354,8 +363,10 @@ namespace OCRTHINGEE
             row.CreateCells(dg_OCRRows, Systemname, Stationname, x.GoodsName, x.SellPrice, x.BuyPrice, x.NumCargo,
                 x.NumSupply,
                 x.TextSupply, x.GalacticAverage);
-            row.DefaultCellStyle.BackColor = Color.LightGreen;
-            row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
+            row.DefaultCellStyle.BackColor = Color.Black;
+            row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 128, 0);
+            row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Bold);
+            row.DefaultCellStyle.SelectionBackColor = Color.Red;
             return row;
         }
 
@@ -506,25 +517,49 @@ namespace OCRTHINGEE
 
             dg_OCRRows.Refresh();
         }
-
+        [DllImport("gdi32.dll", EntryPoint = "AddFontResourceW", SetLastError = true)]
+        public static extern int AddFontResource(
+            [In][MarshalAs(UnmanagedType.LPWStr)]
+        string lpFileName);
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            var applicationpath = Application.StartupPath;
+
+
+            const string fontName = "Eurostile";
+            const float fontSize = 12;
+
+            using (var fontTester = new Font(
+                    fontName,
+                    fontSize,
+                    FontStyle.Regular,
+                    GraphicsUnit.Pixel))
+            {
+                if (fontTester.Name != fontName)
+                {
+                    AddFontResource(applicationpath + @"\EUROSTILE.TTF");
+                    var error = Marshal.GetLastWin32Error();
+                    if (error != 0)
+                    {
+                        MessageBox.Show(new Win32Exception(error).Message);
+                    }
+                }
+
+            }
+
+
             tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
-           
+
             stationsTableAdapter.Fill(eliteDataSet.stations);
-           
+
             systemsTableAdapter.Fill(eliteDataSet.systems);
-          
+
             itemsTableAdapter.Fill(eliteDataSet.items);
-           
-            
+
             _showSystemName = new ShowSystemName();
-          
-            
 
         }
-    
+
         private async void btn_AddRowToDatabase_Click(object sender, EventArgs e)
         {
             using (var elite = new elite_testingEntities())
@@ -611,7 +646,7 @@ namespace OCRTHINGEE
 
                 if (thesystem == null)
                 {
-                    elite.Systems.Add(new system {name = system});
+                    elite.Systems.Add(new system { name = system });
                     elite.SaveChanges();
                     thissystem = elite.Systems.ToList();
 
@@ -634,7 +669,7 @@ namespace OCRTHINGEE
 
                 if (thestation == null)
                 {
-                    elite.Stations.Add(new station {name = station, sysid = thesystem.sysId});
+                    elite.Stations.Add(new station { name = station, sysid = thesystem.sysId });
 
                     elite.SaveChanges();
 
@@ -646,7 +681,7 @@ namespace OCRTHINGEE
                 var thisgood = goodslist.Find(s => s.name == goodsname);
                 if (thisgood == null)
                 {
-                    elite.Items.Add(new item {name = goodsname});
+                    elite.Items.Add(new item { name = goodsname });
                     elite.SaveChanges();
                     goodslist = elite.Items.ToList();
                     thisgood = goodslist.Find(s => s.name == goodsname);
@@ -729,15 +764,12 @@ namespace OCRTHINGEE
                 comboBox4.AutoCompleteCustomSource = _source;
                 comboBox4.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
-            else
-                if (tabControl2.SelectedTab == tabControl2.TabPages["TabPage2"])
-                {
-                    
-                }
+           
+               
 
         }
 
-       
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -828,7 +860,7 @@ namespace OCRTHINGEE
                                              SellPrice = tradeitem.sellprice
                                          };
 
-               
+
 
 
                 var originatingstation = from station in elite.Stations
@@ -864,7 +896,7 @@ namespace OCRTHINGEE
                                  t.Supply,
                                  t.BuyPrice,
                                  f.SellPrice,
-                                 NumberBought = numberBought ,
+                                 NumberBought = numberBought,
                                  Profit = (f.SellPrice - t.BuyPrice) * numberBought
                              };
 
@@ -886,7 +918,7 @@ namespace OCRTHINGEE
 
             var selectedRow = dataGridView2.Rows[selectedrowindex];
 
-           var a = Convert.ToInt32(selectedRow.Cells[0].Value);
+            var a = Convert.ToInt32(selectedRow.Cells[0].Value);
 
             stationsTableAdapter.FillByID(eliteDataSet.stations, a);
 
@@ -907,7 +939,7 @@ namespace OCRTHINGEE
 
             var a = Convert.ToInt32(selectedRow.Cells[0].Value);
             systemsTableAdapter.Delete(a);
-           systemsTableAdapter.Fill(eliteDataSet.systems);
+            systemsTableAdapter.Fill(eliteDataSet.systems);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -925,7 +957,7 @@ namespace OCRTHINGEE
 
         private void button10_Click(object sender, EventArgs e)
         {
-           stationsTableAdapter.Update(eliteDataSet.stations);
+            stationsTableAdapter.Update(eliteDataSet.stations);
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -943,7 +975,7 @@ namespace OCRTHINGEE
 
         private void button12_Click(object sender, EventArgs e)
         {
-           itemsTableAdapter.Update(eliteDataSet.items);
+            itemsTableAdapter.Update(eliteDataSet.items);
         }
 
         private void button9_Click_1(object sender, EventArgs e)
@@ -979,14 +1011,14 @@ namespace OCRTHINGEE
 
         private void Form1_Move(object sender, EventArgs e)
         {
-       
-         var   t = Top;
-         var    l = Left;
-           
+
+            var t = Top;
+            var l = Left;
+
             if (_showSystemName == null) return;
-          
-            _showSystemName.DesktopLocation = new Point(l+100, t+ 100);
-            
+
+            _showSystemName.DesktopLocation = new Point(l + 100, t + 100);
+
         }
     }
 }
