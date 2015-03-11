@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
@@ -166,7 +168,7 @@ namespace OCRTHINGEE
                 var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image,
                     imageandrowlistresults.listrow);
                 _currentTextValues = await task3;
-                pb1.Image = picture;
+                pb1.Image = pb1.Image.Crop();
                 PopulateDataGridView();
                 dg_OCRRows.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
                 tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
@@ -292,6 +294,17 @@ namespace OCRTHINGEE
             Stationname = OcrTesseract(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
             pb2.Image = systemName;
+
+
+              var   t = Top;
+         var    l = Left;
+           
+            
+          
+            _showSystemName.DesktopLocation = new Point(l+100, t+ 100);
+
+
+
           
             return _showSystemName.ShowDialog() == DialogResult.OK;
         }
@@ -510,10 +523,42 @@ namespace OCRTHINGEE
 
             dg_OCRRows.Refresh();
         }
-
+        [DllImport("gdi32.dll", EntryPoint = "AddFontResourceW", SetLastError = true)]
+        public static extern int AddFontResource(
+            [In][MarshalAs(UnmanagedType.LPWStr)]
+        string lpFileName);
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            var applicationpath = Application.StartupPath;
+
+           // MessageBox.Show(applicationpath);
+        // MessageBox.Show(   File.Exists(applicationpath + @"\EUROSTILE.TTF").ToString());
+            const string fontName = "Eurostile";
+            const float fontSize = 12;
+
+            using (var fontTester = new Font(
+                    fontName,
+                    fontSize,
+                    FontStyle.Regular,
+                    GraphicsUnit.Pixel))
+            {
+                if (fontTester.Name != fontName)
+                {
+                     AddFontResource(applicationpath+@"\EUROSTILE.TTF");
+                    var error = Marshal.GetLastWin32Error();
+                    if (error != 0)
+                    {
+                        MessageBox.Show(new Win32Exception(error).Message);
+                    }
+                }
+             
+            }
+
+
+
+
+
+
             tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
            
             stationsTableAdapter.Fill(eliteDataSet.stations);
