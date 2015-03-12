@@ -15,8 +15,7 @@ namespace OCRTHINGEE
 {
     public partial class OCRThingee : Form
     {
-
-        PrivateFontCollection pfc = new PrivateFontCollection();
+        readonly PrivateFontCollection _pfc = new PrivateFontCollection();
         public static string Stationname;
         public static string Systemname;
         private List<RowAsText> _currentTextValues = new List<RowAsText>();
@@ -171,13 +170,10 @@ namespace OCRTHINGEE
                 var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image,
                     imageandrowlistresults.listrow);
                 _currentTextValues = await task3;
-                pb1.Image = pb1.Image.Crop();
+                pb1.Image = pb1.Image.Crop().FilterImage(r1.Value, r2.Value, g1.Value, g2.Value, b1.Value, b2.Value).Invert();
                 PopulateDataGridView();
                 dg_OCRRows.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-                tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
-                stationsTableAdapter.Fill(eliteDataSet.stations);
-                systemsTableAdapter.Fill(eliteDataSet.systems);
-                itemsTableAdapter.Fill(eliteDataSet.items);
+               
             }
             catch (Exception ex)
             {
@@ -564,14 +560,11 @@ namespace OCRTHINGEE
 
                         fontStream.Close();
 
-                        unsafe
+                        fixed (byte* pFontData = fontdata)
                         {
-                            fixed (byte* pFontData = fontdata)
-                            {
-                                pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
-                            }
+                            _pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
                         }
-                        foreach (var ff in pfc.Families)
+                        foreach (var ff in _pfc.Families)
                         {
                             var fn = new Font(ff, 18, FontStyle.Bold);
                             foreach (var c in Controls.OfType<DataGridView>())
@@ -621,6 +614,18 @@ namespace OCRTHINGEE
                     }
                     var task = UpdateDatabaseAsync(elite, cloned);
                     await task;
+                    tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
+
+                    stationsTableAdapter.Fill(eliteDataSet.stations);
+
+                    systemsTableAdapter.Fill(eliteDataSet.systems);
+
+                    itemsTableAdapter.Fill(eliteDataSet.items);
+
+                    dataGridView2.Refresh();
+                    dataGridView3.Refresh();
+                    dataGridView4.Refresh();
+                    dataGridView5.Refresh();
                 }
                 catch (Exception ex)
                 {
