@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
 using System.Drawing.Text;
+
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
     public partial class OCRThingee : Form
     {
+
+        PrivateFontCollection pfc = new PrivateFontCollection();
         public static string Stationname;
         public static string Systemname;
         private List<RowAsText> _currentTextValues = new List<RowAsText>();
@@ -523,22 +525,7 @@ namespace OCRTHINGEE
         {
           
 
-            const string fontName = "Eurostile";
-            const float fontSize = 12;
-
-            using (var fontTester = new Font(
-                    fontName,
-                    fontSize,
-                    FontStyle.Regular,
-                    GraphicsUnit.Pixel))
-            {
-                if (fontTester.Name != fontName)
-                {
-                    this.Font = new Font("Times New Roman", 16.0f,
-                  FontStyle.Regular, GraphicsUnit.Pixel);
-                }
-
-            }
+            LoadFont();
 
 
             tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
@@ -551,6 +538,54 @@ namespace OCRTHINGEE
 
             _showSystemName = new ShowSystemName();
 
+        }
+
+        private unsafe void LoadFont()
+        {
+            const string fontName = "Eurostile";
+            const float fontSize = 12;
+
+            using (var fontTester = new Font(
+                fontName,
+                fontSize,
+                FontStyle.Regular,
+                GraphicsUnit.Pixel))
+            {
+                if (fontTester.Name != fontName)
+                {
+                    Stream fontStream = GetType().Assembly.GetManifestResourceStream("OCRTHINGEE.Eurostile.ttf");
+
+                   
+                    if (fontStream != null)
+                    {
+                        var fontdata = new byte[fontStream.Length];
+
+                        fontStream.Read(fontdata, 0, (int) fontStream.Length);
+
+                        fontStream.Close();
+
+                        unsafe
+                        {
+                            fixed (byte* pFontData = fontdata)
+                            {
+                                pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
+                            }
+                        }
+                        foreach (var ff in pfc.Families)
+                        {
+                            var fn = new Font(ff, 18, FontStyle.Bold);
+                            foreach (var c in Controls.OfType<DataGridView>())
+                            {
+                                c.Font = fn;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(@"Issue loading font");
+                    }
+                }
+            }
         }
 
         private async void btn_AddRowToDatabase_Click(object sender, EventArgs e)

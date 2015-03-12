@@ -192,9 +192,7 @@
     <None Include="EliteDataSet.xss">
       <DependentUpon>EliteDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Eurostile.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Eurostile.ttf" />
     <None Include="OCRTHINGEE_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
