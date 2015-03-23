@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
-using ImageFormat = System.Drawing.Imaging.ImageFormat;
+using System.Drawing.Text;
 
+using ImageFormat = System.Drawing.Imaging.ImageFormat;
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
     public partial class OCRThingee : Form
     {
+        readonly PrivateFontCollection _pfc = new PrivateFontCollection();
         public static string Stationname;
         public static string Systemname;
         private List<RowAsText> _currentTextValues = new List<RowAsText>();
@@ -167,13 +170,10 @@ namespace OCRTHINGEE
                 var task3 = RipEliteColumnAndRowsAndOcrAsync(imageandrowlistresults.image,
                     imageandrowlistresults.listrow);
                 _currentTextValues = await task3;
-                pb1.Image = pb1.Image.Crop();
+                pb1.Image = pb1.Image.Crop().FilterImage(r1.Value, r2.Value, g1.Value, g2.Value, b1.Value, b2.Value).Invert();
                 PopulateDataGridView();
                 dg_OCRRows.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-                tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
-                stationsTableAdapter.Fill(eliteDataSet.stations);
-                systemsTableAdapter.Fill(eliteDataSet.systems);
-                itemsTableAdapter.Fill(eliteDataSet.items);
+               
             }
             catch (Exception ex)
             {
@@ -521,22 +521,7 @@ namespace OCRTHINGEE
         {
           
 
-            const string fontName = "Eurostile";
-            const float fontSize = 12;
-
-            using (var fontTester = new Font(
-                    fontName,
-                    fontSize,
-                    FontStyle.Regular,
-                    GraphicsUnit.Pixel))
-            {
-                if (fontTester.Name != fontName)
-                {
-                    this.Font = new Font("Times New Roman", 16.0f,
-                  FontStyle.Regular, GraphicsUnit.Pixel);
-                }
-
-            }
+            LoadFont();
 
 
             tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
@@ -549,6 +534,51 @@ namespace OCRTHINGEE
 
             _showSystemName = new ShowSystemName();
 
+        }
+
+        private unsafe void LoadFont()
+        {
+            const string fontName = "Eurostile";
+            const float fontSize = 12;
+
+            using (var fontTester = new Font(
+                fontName,
+                fontSize,
+                FontStyle.Regular,
+                GraphicsUnit.Pixel))
+            {
+                if (fontTester.Name != fontName)
+                {
+                    Stream fontStream = GetType().Assembly.GetManifestResourceStream("OCRTHINGEE.Eurostile.ttf");
+
+                   
+                    if (fontStream != null)
+                    {
+                        var fontdata = new byte[fontStream.Length];
+
+                        fontStream.Read(fontdata, 0, (int) fontStream.Length);
+
+                        fontStream.Close();
+
+                        fixed (byte* pFontData = fontdata)
+                        {
+                            _pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
+                        }
+                        foreach (var ff in _pfc.Families)
+                        {
+                            var fn = new Font(ff, 18, FontStyle.Bold);
+                            foreach (var c in Controls.OfType<DataGridView>())
+                            {
+                                c.Font = fn;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(@"Issue loading font");
+                    }
+                }
+            }
         }
 
         private async void btn_AddRowToDatabase_Click(object sender, EventArgs e)
@@ -584,6 +614,18 @@ namespace OCRTHINGEE
                     }
                     var task = UpdateDatabaseAsync(elite, cloned);
                     await task;
+                    tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);
+
+                    stationsTableAdapter.Fill(eliteDataSet.stations);
+
+                    systemsTableAdapter.Fill(eliteDataSet.systems);
+
+                    itemsTableAdapter.Fill(eliteDataSet.items);
+
+                    dataGridView2.Refresh();
+                    dataGridView3.Refresh();
+                    dataGridView4.Refresh();
+                    dataGridView5.Refresh();
                 }
                 catch (Exception ex)
                 {
