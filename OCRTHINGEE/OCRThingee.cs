@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tesseract;
-using System.Drawing.Text;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
+
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
