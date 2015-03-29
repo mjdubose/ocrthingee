@@ -547,36 +547,34 @@ namespace OCRTHINGEE
                 FontStyle.Regular,
                 GraphicsUnit.Pixel))
             {
-                if (fontTester.Name != fontName)
-                {
-                    Stream fontStream = GetType().Assembly.GetManifestResourceStream("OCRTHINGEE.Eurostile.ttf");
+                if (fontTester.Name == fontName) return;
+                Stream fontStream = GetType().Assembly.GetManifestResourceStream("OCRTHINGEE.Eurostile.ttf");
 
                    
-                    if (fontStream != null)
+                if (fontStream != null)
+                {
+                    var fontdata = new byte[fontStream.Length];
+
+                    fontStream.Read(fontdata, 0, (int) fontStream.Length);
+
+                    fontStream.Close();
+
+                    fixed (byte* pFontData = fontdata)
                     {
-                        var fontdata = new byte[fontStream.Length];
-
-                        fontStream.Read(fontdata, 0, (int) fontStream.Length);
-
-                        fontStream.Close();
-
-                        fixed (byte* pFontData = fontdata)
+                        _pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
+                    }
+                    foreach (var ff in _pfc.Families)
+                    {
+                        var fn = new Font(ff, 18, FontStyle.Bold);
+                        foreach (var c in Controls.OfType<DataGridView>())
                         {
-                            _pfc.AddMemoryFont((IntPtr) pFontData, fontdata.Length);
-                        }
-                        foreach (var ff in _pfc.Families)
-                        {
-                            var fn = new Font(ff, 18, FontStyle.Bold);
-                            foreach (var c in Controls.OfType<DataGridView>())
-                            {
-                                c.Font = fn;
-                            }
+                            c.Font = fn;
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show(@"Issue loading font");
-                    }
+                }
+                else
+                {
+                    MessageBox.Show(@"Issue loading font");
                 }
             }
         }
@@ -797,9 +795,6 @@ namespace OCRTHINGEE
                 comboBox4.AutoCompleteCustomSource = _source;
                 comboBox4.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
-           
-               
-
         }
 
 
@@ -882,18 +877,18 @@ namespace OCRTHINGEE
                                          join item in elite.Items on tradeitem.itemid equals item.itemId
                                          where tradeitem.sellprice > 0
                                          where system.sysId == destinationsystemKey.Key
-                                         select new TradeProfitView
+                                         select new 
                                          {
                                              TradeitemId = tradeitem.itemid,
                                              SystemName = system.name,
+                                              StationID = station.stationId,
                                              StationName = station.name,
                                              TradeItemName = item.name,
                                              Supply = tradeitem.supply,
                                              BuyPrice = tradeitem.buyprice,
                                              SellPrice = tradeitem.sellprice
                                          };
-
-
+             
 
 
                 var originatingstation = from station in elite.Stations
@@ -903,10 +898,11 @@ namespace OCRTHINGEE
                                          where tradeitem.supply > 0
                                          where tradeitem.buyprice > 0
                                          where station.stationId == originatingstationKvp.Key
-                                         select new TradeProfitView
+                                         select new 
                                          {
                                              TradeitemId = tradeitem.itemid,
                                              SystemName = system.name,
+                                             StationID = station.stationId,
                                              StationName = station.name,
                                              TradeItemName = item.name,
                                              Supply = tradeitem.supply,
@@ -914,6 +910,8 @@ namespace OCRTHINGEE
                                              SellPrice = tradeitem.sellprice
                                          };
 
+               
+              
 
                 var profit = from t in originatingstation
                              join f in destinationstation
@@ -924,6 +922,7 @@ namespace OCRTHINGEE
                              {
                                  TradeitemID = f.TradeitemId,
                                  f.SystemName,
+                                 f.StationID,
                                  f.StationName,
                                  f.TradeItemName,
                                  t.Supply,
@@ -933,8 +932,15 @@ namespace OCRTHINGEE
                                  Profit = (f.SellPrice - t.BuyPrice) * numberBought
                              };
 
+
                 var y = profit.ToList();
-                y = y.OrderByDescending(x => x.Profit).ToList();
+                 
+              
+                y = y.OrderByDescending(v => v.Profit).GroupBy(v => v.StationID).SelectMany(g => g).ToList();
+
+
+
+
 
                 var bindingSource1 = new BindingSource { DataSource = y };
 
@@ -1027,7 +1033,6 @@ namespace OCRTHINGEE
         private void button10_Click_1(object sender, EventArgs e)
         {
             tradeitemsTableAdapter.Update(eliteDataSet.tradeitems);
-
         }
 
         private void dataGridView3_SelectionChanged(object sender, EventArgs e)

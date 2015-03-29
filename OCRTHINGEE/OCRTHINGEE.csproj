@@ -150,7 +150,6 @@
     <Compile Include="LockBitmap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnedSearchView.cs" />
     <Compile Include="Row.cs" />
     <Compile Include="RowAsText.cs" />
     <Compile Include="RowBMPHolder.cs" />
@@ -161,7 +160,6 @@
       <DependentUpon>ShowSystemName.cs</DependentUpon>
     </Compile>
     <Compile Include="station.cs" />
-    <Compile Include="TradeProfitView.cs" />
     <EmbeddedResource Include="OCRThingee.resx">
       <DependentUpon>OCRThingee.cs</DependentUpon>
     </EmbeddedResource>
