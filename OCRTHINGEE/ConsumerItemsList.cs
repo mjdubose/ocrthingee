@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace OCRTHINGEE
 {
@@ -12,7 +13,7 @@ namespace OCRTHINGEE
     {
         private readonly string[] _items =
         {
-            "PESTICIDES", "MINERAL OIL", "EXPLOSIVES", "HYDROGEN FUEL", "DOM APPLIANCES", "CONSUMER TECHNOLOGY",
+            "PESTICIDES", "MINERAL OIL", "EXPLOSIVES", "HYDROGEN FUEL", "DOMESTIC APPLIANCES", "CONSUMER TECHNOLOGY",
             "CLOTHING", "DRUGS", "LIQUOR", "TOBACCO", "WINE", "NARCOTICS", "BEER", "COFFEE", "TEA", "FOOD CARTRIDGES",
             "FISH", "SYNTHETIC MEAT", "ANIMAL MEAT", "GRAIN", "ALGAE",
             "FRUIT AND VEGETABLES", "FISH", "SEMICONDUCTORS", "SUPERCONDUCTORS", "POLYMERS", "PLASTICS", "MACHINERY",
@@ -46,7 +47,7 @@ namespace OCRTHINGEE
                 thisword.Closeid = tmep;
                 thisword.Item = word;
             }
-             
+            MessageBox.Show("ocr txt :" + ocrword + " suggested word : " + thisword.Item);
             return thisword.Item;
         }
 

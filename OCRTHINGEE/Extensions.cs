@@ -185,6 +185,7 @@ namespace OCRTHINGEE
         {
             var imageX = new Bitmap(imageZ);
             var image = AForge.Imaging.Image.Clone(imageX, PixelFormat.Format24bppRgb);
+         
             var filter = new ColorFiltering {FillOutsideRange = true};
             var red1 = Convert.ToInt32(r1);
             var red2 = Convert.ToInt32(r2);
@@ -192,7 +193,7 @@ namespace OCRTHINGEE
             var green2 = Convert.ToInt32(g2);
             var blue1 = Convert.ToInt32(b1);
             var blue2 = Convert.ToInt32(b2);
-
+        
             filter.Red = new IntRange(red1, red2);
             filter.Green = new IntRange(green1, green2);
             filter.Blue = new IntRange(blue1, blue2);

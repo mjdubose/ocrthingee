@@ -140,6 +140,7 @@
       <DependentUpon>EliteDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="OCRENGINE.cs" />
     <Compile Include="OCRThingee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +161,7 @@
       <DependentUpon>ShowSystemName.cs</DependentUpon>
     </Compile>
     <Compile Include="station.cs" />
+    <Compile Include="Tesseract.cs" />
     <EmbeddedResource Include="OCRThingee.resx">
       <DependentUpon>OCRThingee.cs</DependentUpon>
     </EmbeddedResource>

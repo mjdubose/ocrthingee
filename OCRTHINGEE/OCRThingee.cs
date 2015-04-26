@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tesseract;
-using System.Drawing.Text;
+using IOCRTHINGEE;
 
-using ImageFormat = System.Drawing.Imaging.ImageFormat;
 //https://github.com/mjdubose/ocrthingee.git
 namespace OCRTHINGEE
 {
@@ -26,12 +26,12 @@ namespace OCRTHINGEE
         private readonly AutoCompleteStringCollection _stationsource = new AutoCompleteStringCollection();
         private readonly List<string> _systemcollectionstrings = new List<string>();
         ShowSystemName _showSystemName;
+        private static readonly IOCRENGINE InterfaceOcr = new Tesseract();
 
 
         public OCRThingee()
         {
             InitializeComponent();
-
 
         }
 
@@ -52,7 +52,6 @@ namespace OCRTHINGEE
                 MessageBox.Show(@"Please load an image!");
                 return;
             }
-
 
             pb1.Image = Image.FromFile(_path);
         }
@@ -75,7 +74,7 @@ namespace OCRTHINGEE
         private void button2_Click(object sender, EventArgs e)
         {
             if (_path != null)
-            {
+            { 
                 pb1.Image = pb1.Image.FilterImage(r1.Value, r2.Value, g1.Value, g2.Value, b1.Value, b2.Value);
             }
         }
@@ -290,7 +289,7 @@ namespace OCRTHINGEE
                 78 * source.Height / 900 - 54 * source.Height / 900).ResizeBmp();
 
             systemName.Save(@"c:\ocrtest\SystemName.Tiff", ImageFormat.Tiff);
-            Stationname = OcrTesseract(@"c:\ocrtest\SystemName.Tiff");
+            Stationname = InterfaceOcr.GetText(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
             pb2.Image = systemName;
 
@@ -317,9 +316,8 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            for (int index = 0; index < _currentTextValues.Count; index++)
+            foreach (var x in _currentTextValues)
             {
-                var x = _currentTextValues[index];
                 if ((x.SellPrice == "") && (x.BuyPrice == "") && (x.NumCargo == "") && (x.NumSupply == "") &&
                     (x.TextSupply == "") && (x.GalacticAverage == "")) continue;
                 GridviewDisplayedDataCleanUp(x, productlist);
@@ -400,10 +398,10 @@ namespace OCRTHINGEE
 
         public Task<List<RowAsText>> RipEliteColumnAndRowsAndOcrAsync(Image image, IEnumerable<Row> rowHolder)
         {
-            return Task.Run(() => TesseractOcr(image, rowHolder));
+            return Task.Run(() => Ocr(image, rowHolder));
         }
 
-        private static List<RowAsText> TesseractOcr(Image image, IEnumerable<Row> rowHolder)
+        private static List<RowAsText> Ocr(Image image, IEnumerable<Row> rowHolder)
         {
             var source = new Bitmap(image);
             var currentTextValues = new List<RowAsText>();
@@ -437,37 +435,36 @@ namespace OCRTHINGEE
                         .ResizeBmp()
             }).ToList();
 
-            for (int index = 0; index < rowbmpholder.Count; index++)
+            foreach (var temp in rowbmpholder)
             {
-                var temp = rowbmpholder[index];
                 var tesseract = new RowAsText();
 
                 temp.GoodsName.Save(@"c:\ocrtest\GoodsName.Tiff", ImageFormat.Tiff);
-                tesseract.GoodsName = OcrTesseract(@"c:\ocrtest\GoodsName.Tiff");
+                tesseract.GoodsName = InterfaceOcr.GetText(@"c:\ocrtest\GoodsName.Tiff");
                 @"c:\ocrtest\GoodsName.Tiff".TryToDelete();
 
                 temp.SellPrice.Save(@"c:\ocrtest\SellPrice.Tiff", ImageFormat.Tiff);
-                tesseract.SellPrice = OcrTesseract(@"c:\ocrtest\SellPrice.Tiff");
+                tesseract.SellPrice = InterfaceOcr.GetText(@"c:\ocrtest\SellPrice.Tiff");
                 @"c:\ocrtest\SellPrice.Tiff".TryToDelete();
 
                 temp.BuyPrice.Save(@"c:\ocrtest\BuyPrice.Tiff", ImageFormat.Tiff);
-                tesseract.BuyPrice = OcrTesseract(@"c:\ocrtest\BuyPrice.Tiff");
+                tesseract.BuyPrice = InterfaceOcr.GetText(@"c:\ocrtest\BuyPrice.Tiff");
                 @"c:\ocrtest\BuyPrice.Tiff".TryToDelete();
 
                 temp.NumCargo.Save(@"c:\ocrtest\NumCargo.Tiff", ImageFormat.Tiff);
-                tesseract.NumCargo = OcrTesseract(@"c:\ocrtest\NumCargo.Tiff");
+                tesseract.NumCargo = InterfaceOcr.GetText(@"c:\ocrtest\NumCargo.Tiff");
                 @"c:\ocrtest\NumCargo.Tiff".TryToDelete();
 
                 temp.NumSupply.Save(@"c:\ocrtest\NumSupply.Tiff", ImageFormat.Tiff);
-                tesseract.NumSupply = OcrTesseract(@"c:\ocrtest\NumSupply.Tiff");
+                tesseract.NumSupply = InterfaceOcr.GetText(@"c:\ocrtest\NumSupply.Tiff");
                 @"c:\ocrtest\NumSupply.Tiff".TryToDelete();
 
                 temp.TextSupply.Save(@"c:\ocrtest\TextSupply.Tiff", ImageFormat.Tiff);
-                tesseract.TextSupply = OcrTesseract(@"c:\ocrtest\TextSupply.Tiff");
+                tesseract.TextSupply = InterfaceOcr.GetText(@"c:\ocrtest\TextSupply.Tiff");
                 @"c:\ocrtest\TextSupply.Tiff".TryToDelete();
 
                 temp.GalacticAverage.Save(@"c:\ocrtest\x.Tiff", ImageFormat.Tiff);
-                tesseract.GalacticAverage = OcrTesseract(@"c:\ocrtest\x.Tiff");
+                tesseract.GalacticAverage = InterfaceOcr.GetText(@"c:\ocrtest\x.Tiff");
                 @"c:\ocrtest\x.Tiff".TryToDelete();
 
                 currentTextValues.Add(tesseract);
@@ -477,22 +474,7 @@ namespace OCRTHINGEE
             return currentTextValues;
         }
 
-        private static string OcrTesseract(string testImagePath)
-        {
-            using (var engine = new TesseractEngine(@"./tessdata", "small", EngineMode.TesseractOnly))
-            {
-                using (var img = Pix.LoadFromFile(testImagePath))
-                {
-                    using (var page = engine.Process(img))
-                    {
-                        return page.GetText();
-                    }
-                }
-            }
-        }
-
-
-
+  
         private void btn_DeleteRow_Click(object sender, EventArgs e)
         {
             foreach (var oneCell in dg_OCRRows.SelectedCells.Cast<DataGridViewCell>().Where(oneCell => oneCell.Selected)
@@ -765,36 +747,34 @@ namespace OCRTHINGEE
 
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl2.SelectedTab == tabControl2.TabPages["TabPage1"])
+            if (tabControl2.SelectedTab != tabControl2.TabPages["TabPage1"]) return;
+            _source.Clear();
+            _systemcollectionstrings.Clear();
+
+            var systemvalues = new Dictionary<int, string>();
+            using (var elite = new elite_testingEntities())
             {
-                _source.Clear();
-                _systemcollectionstrings.Clear();
-
-                var systemvalues = new Dictionary<int, string>();
-                using (var elite = new elite_testingEntities())
+                var systemcollection = from p in elite.Systems select p;
+                _systemcollectionstrings.AddRange(systemcollection.Select(x => x.name));
+                foreach (var v in systemcollection.ToList())
                 {
-                    var systemcollection = from p in elite.Systems select p;
-                    _systemcollectionstrings.AddRange(systemcollection.Select(x => x.name));
-                    foreach (var v in systemcollection.ToList())
-                    {
-                        systemvalues.Add(v.sysId, v.name);
-                    }
+                    systemvalues.Add(v.sysId, v.name);
                 }
-                _source.AddRange(_systemcollectionstrings.ToArray());
-                comboBox1.DataSource = new BindingSource(systemvalues, null);
-                comboBox1.DisplayMember = "Value";
-                comboBox1.ValueMember = "Key";
-                comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox1.AutoCompleteCustomSource = _source;
-                comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-                comboBox4.DataSource = new BindingSource(systemvalues, null);
-                comboBox4.DisplayMember = "Value";
-                comboBox4.ValueMember = "Key";
-                comboBox4.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox4.AutoCompleteCustomSource = _source;
-                comboBox4.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
+            _source.AddRange(_systemcollectionstrings.ToArray());
+            comboBox1.DataSource = new BindingSource(systemvalues, null);
+            comboBox1.DisplayMember = "Value";
+            comboBox1.ValueMember = "Key";
+            comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBox1.AutoCompleteCustomSource = _source;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            comboBox4.DataSource = new BindingSource(systemvalues, null);
+            comboBox4.DisplayMember = "Value";
+            comboBox4.ValueMember = "Key";
+            comboBox4.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBox4.AutoCompleteCustomSource = _source;
+            comboBox4.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
 
@@ -832,8 +812,6 @@ namespace OCRTHINGEE
                     stationvalues.Add(0, "NO STATION");
                 }
             }
-
-
             comboBox2.DisplayMember = "Value";
             comboBox2.ValueMember = "Key";
             comboBox2.DataSource = new BindingSource(stationvalues, null);
@@ -938,10 +916,6 @@ namespace OCRTHINGEE
               
                 y = y.OrderByDescending(v => v.Profit).GroupBy(v => v.StationID).SelectMany(g => g).ToList();
 
-
-
-
-
                 var bindingSource1 = new BindingSource { DataSource = y };
 
                 dataGridView1.DataSource = bindingSource1;
@@ -1023,8 +997,6 @@ namespace OCRTHINGEE
             var selectedrowindex = dataGridView5.SelectedCells[0].RowIndex;
 
             var selectedRow = dataGridView5.Rows[selectedrowindex];
-
-
 
             tradeitemsTableAdapter.Delete(Convert.ToInt32(selectedRow.Cells[0].Value), Convert.ToInt32(selectedRow.Cells[1].Value), Convert.ToInt32(selectedRow.Cells[2].Value), selectedRow.Cells[3].Value as int?, selectedRow.Cells[4].Value as int?, selectedRow.Cells[5].Value as int?, selectedRow.Cells[6].Value as DateTime?);
             tradeitemsTableAdapter.Fill(eliteDataSet.tradeitems);

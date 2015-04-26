@@ -20,6 +20,7 @@ namespace OCRTHINGEE
             {
                 components.Dispose();
             }
+            
             base.Dispose(disposing);
         }
 
