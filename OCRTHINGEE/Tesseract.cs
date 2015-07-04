@@ -15,7 +15,7 @@ namespace OCRTHINGEE
         public  string GetText(string testImagePath)
         {
            
-            
+           
                 using (var img = Pix.LoadFromFile(testImagePath))
                 {
                     using (var page = _engine.Process(img))

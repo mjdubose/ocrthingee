@@ -288,6 +288,20 @@ namespace OCRTHINGEE
             var systemName = source.Clone(54 * source.Height / 900, 61 * source.Width / 1600, 340 * source.Width / 1600,
                 78 * source.Height / 900 - 54 * source.Height / 900).ResizeBmp();
 
+            if (!Directory.Exists(@"c:\ocrtest"))
+            {
+                try
+                {
+                    Directory.CreateDirectory(@"c:\ocrtest");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+
+            }
+
             systemName.Save(@"c:\ocrtest\SystemName.Tiff", ImageFormat.Tiff);
             Stationname = InterfaceOcr.GetText(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
@@ -362,7 +376,7 @@ namespace OCRTHINGEE
                 x.TextSupply, x.GalacticAverage);
             row.DefaultCellStyle.BackColor = Color.Black;
             row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 128, 0);
-            row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Bold);
+            row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Regular);
             row.DefaultCellStyle.SelectionBackColor = Color.Red;
             return row;
         }

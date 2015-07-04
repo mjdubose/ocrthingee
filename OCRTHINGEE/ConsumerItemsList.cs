@@ -11,6 +11,7 @@ namespace OCRTHINGEE
 
     internal class ConsumerItemsList
     {
+        //need to have the code load these items from the database (add methods to add new items below)
         private readonly string[] _items =
         {
             "PESTICIDES", "MINERAL OIL", "EXPLOSIVES", "HYDROGEN FUEL", "DOMESTIC APPLIANCES", "CONSUMER TECHNOLOGY",
@@ -47,7 +48,11 @@ namespace OCRTHINGEE
                 thisword.Closeid = tmep;
                 thisword.Item = word;
             }
-            MessageBox.Show("ocr txt :" + ocrword + " suggested word : " + thisword.Item);
+            MessageBox.Show(@"ocr txt :" + ocrword + @" suggested word : " + thisword.Item);
+
+            //have option to add new word here somewhere or where this is returned.  
+
+
             return thisword.Item;
         }
 
@@ -71,7 +76,7 @@ namespace OCRTHINGEE
         ///     Returns the number of steps required to transform the source string
         ///     into the target string.
         /// </summary>
-        private int ComputeLevenshteinDistance(string source, string target)
+        private static int ComputeLevenshteinDistance(string source, string target)
         {
             if ((source == null) || (target == null)) return 0;
             if ((source.Length == 0) || (target.Length == 0)) return 0;
