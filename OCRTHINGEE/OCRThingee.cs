@@ -330,10 +330,8 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            foreach (var x in _currentTextValues)
+            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumCargo != "") || (x.NumSupply != "") || (x.TextSupply != "") || (x.GalacticAverage != "")))
             {
-                if ((x.SellPrice == "") && (x.BuyPrice == "") && (x.NumCargo == "") && (x.NumSupply == "") &&
-                    (x.TextSupply == "") && (x.GalacticAverage == "")) continue;
                 GridviewDisplayedDataCleanUp(x, productlist);
                 dg_OCRRows.Rows.Add(MakeNewDataGridViewRow(x));
             }

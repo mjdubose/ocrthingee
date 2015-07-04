@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
+using OCRTHINGEE.EliteDataSetTableAdapters;
 
 namespace OCRTHINGEE
 {
@@ -1324,16 +1325,16 @@ namespace OCRTHINGEE
         private BindingSource eliteDataSetBindingSource;
         private EliteDataSet eliteDataSet;
         private BindingSource itemsBindingSource;
-        private EliteDataSetTableAdapters.itemsTableAdapter itemsTableAdapter;
+        private itemsTableAdapter itemsTableAdapter;
         private BindingSource systemsBindingSource;
-        private EliteDataSetTableAdapters.systemsTableAdapter systemsTableAdapter;
+        private systemsTableAdapter systemsTableAdapter;
         private BindingSource stationsBindingSource;
-        private EliteDataSetTableAdapters.stationsTableAdapter stationsTableAdapter;
+        private stationsTableAdapter stationsTableAdapter;
         private DataGridViewTextBoxColumn stationIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn sysidDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private BindingSource tradeitemsBindingSource;
-        private EliteDataSetTableAdapters.tradeitemsTableAdapter tradeitemsTableAdapter;
+        private tradeitemsTableAdapter tradeitemsTableAdapter;
         private DataGridViewTextBoxColumn productsIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn stationidDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn itemidDataGridViewTextBoxColumn1;
