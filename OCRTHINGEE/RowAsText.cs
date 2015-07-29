@@ -6,7 +6,7 @@ namespace OCRTHINGEE
     {
         private string _buyprice;
         private string _galacticaverage;
-        private string _numcargo;
+       
         private string _numsupply;
        
 
@@ -26,11 +26,7 @@ namespace OCRTHINGEE
             set { _buyprice = ClearPunctuationAndWhiteSpace(value); }
         }
 
-        public string NumCargo
-        {
-            get { return _numcargo; }
-            set { _numcargo = ClearPunctuationAndWhiteSpace(value); }
-        }
+        
 
         public string NumSupply
         {

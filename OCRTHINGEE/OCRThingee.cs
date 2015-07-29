@@ -156,7 +156,7 @@ namespace OCRTHINGEE
             decimal g2,
             decimal b1, decimal b2)
         {
-            return Task.Run(() => (Image)imageToBeCleaned.Invert().Crop());//.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
+            return Task.Run(() => (Image)imageToBeCleaned.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
         }
 
         private static Task<ImageAndRowList> DefineRowsForImageRippingAsync(ICloneable pbimage, List<Row> rowlist)
@@ -290,7 +290,7 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumCargo != "") || (x.NumSupply != "") || (x.TextSupply != "") || (x.GalacticAverage != "")))
+            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumSupply != "") || (x.TextSupply != "") || (x.GalacticAverage != "")))
             {
                 GridviewDisplayedDataCleanUp(x, productlist);
                 dg_OCRRows.Rows.Add(MakeNewDataGridViewRow(x));
@@ -312,10 +312,7 @@ namespace OCRTHINGEE
             {
                 x.BuyPrice = "0";
             }
-            if (x.NumCargo == "")
-            {
-                x.NumCargo = "0";
-            }
+      
             if (x.NumSupply == "")
             {
                 x.NumSupply = "0";
@@ -329,8 +326,7 @@ namespace OCRTHINGEE
         private DataGridViewRow MakeNewDataGridViewRow(RowAsText x)
         {
             var row = new DataGridViewRow();
-            row.CreateCells(dg_OCRRows, Systemname, Stationname, x.GoodsName, x.SellPrice, x.BuyPrice, x.NumCargo,
-                x.NumSupply,
+            row.CreateCells(dg_OCRRows, Systemname, Stationname, x.GoodsName, x.SellPrice, x.BuyPrice, x.NumSupply,
                 x.TextSupply, x.GalacticAverage);
             row.DefaultCellStyle.BackColor = Color.Black;
             row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 128, 0);
@@ -351,16 +347,14 @@ namespace OCRTHINGEE
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
-            dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns[0].Name = "SystemName";
             dg_OCRRows.Columns[1].Name = "StationName";
             dg_OCRRows.Columns[2].Name = "GoodsName";
             dg_OCRRows.Columns[3].Name = "SellPrice";
             dg_OCRRows.Columns[4].Name = "BuyPrice";
-            dg_OCRRows.Columns[5].Name = "NumCargo";
-            dg_OCRRows.Columns[6].Name = "NumSupply";
-            dg_OCRRows.Columns[7].Name = "TextSupply";
-            dg_OCRRows.Columns[8].Name = "GalacticAverage";
+            dg_OCRRows.Columns[5].Name = "NumSupply";
+            dg_OCRRows.Columns[6].Name = "TextSupply";
+            dg_OCRRows.Columns[7].Name = "GalacticAverage";
         }
 
         public Task UpdateDatabaseAsync(elite_testingEntities elite, DataGridView thegrid)
@@ -389,10 +383,7 @@ namespace OCRTHINGEE
                     source.Clone(rownum.RowTop, 381 * source.Width / 1000, 71 * source.Width / 1000,
                         rownum.RowBottom - rownum.RowTop)
                         .ResizeBmp(),
-                NumCargo =
-                    source.Clone(rownum.RowTop, 454 * source.Width / 1000, 73 * source.Width / 1000,
-                        rownum.RowBottom - rownum.RowTop)
-                        .ResizeBmp(),
+             
                 NumSupply =
                     source.Clone(rownum.RowTop, 684 * source.Width / 1000, 90 * source.Width / 1000,
                         rownum.RowBottom - rownum.RowTop)
@@ -422,10 +413,6 @@ namespace OCRTHINGEE
                 temp.BuyPrice.Save(@"c:\ocrtest\BuyPrice.Tiff", ImageFormat.Tiff);
                 tesseract.BuyPrice = InterfaceOcr.GetText(@"c:\ocrtest\BuyPrice.Tiff");
                 @"c:\ocrtest\BuyPrice.Tiff".TryToDelete();
-
-                temp.NumCargo.Save(@"c:\ocrtest\NumCargo.Tiff", ImageFormat.Tiff);
-                tesseract.NumCargo = InterfaceOcr.GetText(@"c:\ocrtest\NumCargo.Tiff");
-                @"c:\ocrtest\NumCargo.Tiff".TryToDelete();
 
                 temp.NumSupply.Save(@"c:\ocrtest\NumSupply.Tiff", ImageFormat.Tiff);
                 tesseract.NumSupply = InterfaceOcr.GetText(@"c:\ocrtest\NumSupply.Tiff");
@@ -548,16 +535,14 @@ namespace OCRTHINGEE
                     cloned.Columns.Add(new DataGridViewTextBoxColumn());
                     cloned.Columns.Add(new DataGridViewTextBoxColumn());
                     cloned.Columns.Add(new DataGridViewTextBoxColumn());
-                    cloned.Columns.Add(new DataGridViewTextBoxColumn());
                     cloned.Columns[0].Name = "SystemName";
                     cloned.Columns[1].Name = "StationName";
                     cloned.Columns[2].Name = "GoodsName";
                     cloned.Columns[3].Name = "SellPrice";
                     cloned.Columns[4].Name = "BuyPrice";
-                    cloned.Columns[5].Name = "NumCargo";
-                    cloned.Columns[6].Name = "NumSupply";
-                    cloned.Columns[7].Name = "TextSupply";
-                    cloned.Columns[8].Name = "GalacticAverage";
+                    cloned.Columns[5].Name = "NumSupply";
+                    cloned.Columns[6].Name = "TextSupply";
+                    cloned.Columns[7].Name = "GalacticAverage";
 
                     foreach (var y in
                         dg_OCRRows.Rows.Cast<DataGridViewRow>().Where(y => y.Cells[2].Value.ToString() != ""))
