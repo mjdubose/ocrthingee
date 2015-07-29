@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace OCRTHINGEE
@@ -9,27 +10,16 @@ namespace OCRTHINGEE
         public string Item;
     }
 
-    internal class ConsumerItemsList
+    public class ConsumerItemsList
     {
-        private readonly string[] _items =
+        private string[] _items;
+        public ConsumerItemsList()
         {
-            "PESTICIDES", "MINERAL OIL", "EXPLOSIVES", "HYDROGEN FUEL", "DOMESTIC APPLIANCES", "CONSUMER TECHNOLOGY",
-            "CLOTHING", "DRUGS", "LIQUOR", "TOBACCO", "WINE", "NARCOTICS", "BEER", "COFFEE", "TEA", "FOOD CARTRIDGES",
-            "FISH", "SYNTHETIC MEAT", "ANIMAL MEAT", "GRAIN", "ALGAE",
-            "FRUIT AND VEGETABLES", "FISH", "SEMICONDUCTORS", "SUPERCONDUCTORS", "POLYMERS", "PLASTICS", "MACHINERY",
-            "HEL-STATIC FURNACES", "MICROBIAL FURNACES" , "MINERAL EXTRACTORS", "CROP HARVESTERS", "MARINE EQUIPMENT", "PERFORMANCE ENHANCERS",
-            "PROGENITOR CELLS", "COMBAT STABILISERS", "BASIC MEDICINES", "AGRI-MEDICINES", "GOLD", "SILVER", "PALLADIUM",
-            "ALUMINIUM", "LITHIUM", "COPPER", "COBALT", "URANIUM", "INDIUM", "TITANIUM", "TANTALUM", "BERTRANDITE",
-            "BERYLLIUM", "GALLIUM", "COLTAN", "RUTILE", "LEPIDOLITE", "INDITE", "GALLITE", "BAUXITE","PAINITE",
-            "LAND ENRICHMENT SYSTEMS", "ROBOTICS", "H.E. SUITS", "COMPUTER COMPONTENTS", "AQUAPONIC SYSTEMS",
-            "AUTO-FABRICATORS", "POWER GENERATORS", "WATER PURIFIERS",
-            "RESONATING SEPARATORS", "ADVANCED CATALYSERS", "ANIMAL MONITORS", "BIOREDUCING LICHEN", "COTTON", "LEATHER",
-            "SYNTHETIC FABRICS", "NATURAL FABRICS", "BIOWASTE", "SCRAP", "REACTIVE ARMOUR", "PERSONAL WEAPONS",
-            "NON-LETHAL WEAPONS", "ATMOSPHERIC PROCESSORS",
-            "MINERAL OIL", "PESTICIDES", "CLOTHING", "ENERGY DRINKS", "CROP HARVESTERS", "MINERAL EXTRACTORS",
-            "PLATINUM", "SILVER", "URANITE", "TOXIC WASTE","CHEMICAL WASTE", "BATTLE WEAPONS", "HIGH", "MED", "LOW"
-        };
+             var elite = new elite_testingEntities();
 
+        _items = (from item in elite.Items select item.name).ToArray();
+        }
+      
         public string ReturnMostSimilarWord(string ocrword)
         {
             var thisword = new Closeness {Closeid = -1.0, Item = ""};
@@ -47,7 +37,11 @@ namespace OCRTHINGEE
                 thisword.Closeid = tmep;
                 thisword.Item = word;
             }
-            MessageBox.Show("ocr txt :" + ocrword + " suggested word : " + thisword.Item);
+            MessageBox.Show(@"ocr txt :" + ocrword + @" suggested word : " + thisword.Item);
+
+            //have option to add new word here somewhere or where this is returned.  
+
+
             return thisword.Item;
         }
 
@@ -57,7 +51,7 @@ namespace OCRTHINGEE
         ///     <param name="target">Targeted String to Compare</param>
         ///     <returns>Return Similarity between two strings from 0 to 1.0</returns>
         /// </summary>
-        private double CalculateSimilarity(string source, string target)
+        private static double CalculateSimilarity(string source, string target)
         {
             if ((source == null) || (target == null)) return 0.0;
             if ((source.Length == 0) || (target.Length == 0)) return 0.0;
@@ -71,7 +65,7 @@ namespace OCRTHINGEE
         ///     Returns the number of steps required to transform the source string
         ///     into the target string.
         /// </summary>
-        private int ComputeLevenshteinDistance(string source, string target)
+        private static int ComputeLevenshteinDistance(string source, string target)
         {
             if ((source == null) || (target == null)) return 0;
             if ((source.Length == 0) || (target.Length == 0)) return 0;

@@ -132,6 +132,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckAddWordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckAddWordForm.Designer.cs">
+      <DependentUpon>CheckAddWordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConsumerItemsList.cs" />
     <Compile Include="Coord.cs" />
     <Compile Include="EliteDataSet.Designer.cs">
@@ -162,6 +168,9 @@
     </Compile>
     <Compile Include="station.cs" />
     <Compile Include="Tesseract.cs" />
+    <EmbeddedResource Include="CheckAddWordForm.resx">
+      <DependentUpon>CheckAddWordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OCRThingee.resx">
       <DependentUpon>OCRThingee.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,8 +245,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\test_log.ldf">
-      <DependentUpon>test.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>test.mdf</DependentUpon>
     </Content>
     <Content Include="test.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

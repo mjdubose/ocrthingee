@@ -124,12 +124,9 @@ namespace OCRTHINGEE
                 var r = Pixels[i + 2];
                 clr = Color.FromArgb(r, g, b);
             }
-            if (Depth == 8)
-                // For 8 bpp get color value (Red, Green and Blue values are the same)
-            {
-                var c = Pixels[i];
-                clr = Color.FromArgb(c, c, c);
-            }
+            if (Depth != 8) return clr;
+            var c = Pixels[i];
+            clr = Color.FromArgb(c, c, c);
             return clr;
         }
 

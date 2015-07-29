@@ -102,47 +102,7 @@ namespace OCRTHINGEE
             pb1.Image = pb1.Image.DefineRowsForImageRipping(_rowholder);
         }
 
-        public static Bitmap ClearHorizontalBars(Bitmap image)
-        {
-            var temp = new LockBitmap(image);
-            temp.LockBits();
-            var vert = 0;
-            while (vert < temp.Height)
-            {
-                var hor = 0;
-                while (hor < temp.Width)
-                {
-                    var color = temp.GetPixel(hor, vert);
-                    if (color.R <= 255 && color.R >= 240 && color.G <= 255 && color.G >= 240 && color.B <= 255 &&
-                        color.B >= 240)
-                    {
-                        temp.SetPixel(hor, vert, Color.White);
-                    }
-                    if (!(color.R == 255 && color.B == 255 && color.G == 255) && (hor == 0))
-                    {
-                        for (var dotwice = -3; dotwice < 3; dotwice++)
-                        {
-                            for (var horclear = 0; horclear < image.Width; horclear++)
-                            {
-                                if (vert + dotwice < 0) continue;
-                                if (vert + dotwice > image.Height - 1)
-                                {
-                                    temp.SetPixel(horclear, vert, Color.White);
-                                    dotwice = 3;
-                                }
-                                else
-                                    temp.SetPixel(horclear, vert + dotwice, Color.White);
-                            }
-                        }
-                    }
-                    hor++;
-                }
-                vert++;
-            }
-            temp.UnlockBits();
-            return temp.GetBitmap();
-        }
-
+    
         private async void button17_Click(object sender, EventArgs e)
         {
             _currentTextValues.Clear();
@@ -196,7 +156,7 @@ namespace OCRTHINGEE
             decimal g2,
             decimal b1, decimal b2)
         {
-            return Task.Run(() => (Image)imageToBeCleaned.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
+            return Task.Run(() => (Image)imageToBeCleaned.Invert().Crop());//.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
         }
 
         private static Task<ImageAndRowList> DefineRowsForImageRippingAsync(ICloneable pbimage, List<Row> rowlist)
@@ -206,7 +166,7 @@ namespace OCRTHINGEE
 
         private static Task<Bitmap> ClearHorizontalBarsAsync(Bitmap image)
         {
-            return Task.Run(() => ClearHorizontalBars(image));
+            return Task.Run(() => Extensions.ClearHorizontalBars(image));
         }
 
         private static async Task<ImageAndRowList> DefineRowsAsync(ICloneable pbimage, List<Row> rowlist)
@@ -288,6 +248,20 @@ namespace OCRTHINGEE
             var systemName = source.Clone(54 * source.Height / 900, 61 * source.Width / 1600, 340 * source.Width / 1600,
                 78 * source.Height / 900 - 54 * source.Height / 900).ResizeBmp();
 
+            if (!Directory.Exists(@"c:\ocrtest"))
+            {
+                try
+                {
+                    Directory.CreateDirectory(@"c:\ocrtest");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+
+            }
+
             systemName.Save(@"c:\ocrtest\SystemName.Tiff", ImageFormat.Tiff);
             Stationname = InterfaceOcr.GetText(@"c:\ocrtest\SystemName.Tiff");
             if (Stationname == null) return false;
@@ -316,10 +290,8 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            foreach (var x in _currentTextValues)
+            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumCargo != "") || (x.NumSupply != "") || (x.TextSupply != "") || (x.GalacticAverage != "")))
             {
-                if ((x.SellPrice == "") && (x.BuyPrice == "") && (x.NumCargo == "") && (x.NumSupply == "") &&
-                    (x.TextSupply == "") && (x.GalacticAverage == "")) continue;
                 GridviewDisplayedDataCleanUp(x, productlist);
                 dg_OCRRows.Rows.Add(MakeNewDataGridViewRow(x));
             }
@@ -362,7 +334,7 @@ namespace OCRTHINGEE
                 x.TextSupply, x.GalacticAverage);
             row.DefaultCellStyle.BackColor = Color.Black;
             row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 128, 0);
-            row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Bold);
+            row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Regular);
             row.DefaultCellStyle.SelectionBackColor = Color.Red;
             return row;
         }

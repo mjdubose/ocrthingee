@@ -57,12 +57,12 @@ namespace OCRTHINGEE
                 PixelFormat.Format32bppArgb);
 
             var origByteCount = rawOriginal.Stride*rawOriginal.Height;
-            var origBytes = new Byte[origByteCount];
+            var origBytes = new byte[origByteCount];
             Marshal.Copy(rawOriginal.Scan0, origBytes, 0, origByteCount);
 
             const int bpp = 4; //4 Bpp = 32 bits, 3 = 24, etc.
 
-            var croppedBytes = new Byte[width*height*bpp];
+            var croppedBytes = new byte[width*height*bpp];
 
             //Iterate the selected area of the original image, and the full area of the new image
             for (var i = 0; i < height; i++)
@@ -100,7 +100,31 @@ namespace OCRTHINGEE
             var image = AForge.Imaging.Image.Clone(new Bitmap(imagex), PixelFormat.Format24bppRgb);
             var filter = new Invert();
             filter.ApplyInPlace(image);
-            return image;
+
+            var fastImage = new LockBitmap(image);
+            fastImage.LockBits();
+           var vert = 0;
+            while (vert < fastImage.Height)
+            {
+                var hor = 0;
+                while (hor < fastImage.Width)
+                {
+                   var color = fastImage.GetPixel(hor, vert);
+                   if ( color.R >= 90  )
+                    {
+                   fastImage.SetPixel(hor, vert, Color.White);
+                   }
+
+                    hor++;
+                }
+                vert++;
+            }
+            fastImage.UnlockBits();
+
+
+
+
+            return fastImage.GetBitmap();
         }
 
         public static Bitmap ResizeBmp(this Bitmap bmp)
@@ -198,13 +222,15 @@ namespace OCRTHINGEE
             filter.Green = new IntRange(green1, green2);
             filter.Blue = new IntRange(blue1, blue2);
 
-            var nImage = filter.Apply(image);
-            return nImage;
+           return filter.Apply(image);
+          
         }
 
         public static Bitmap ClearHorizontalBars(Bitmap imageoriginal)
         {
-            var image = imageoriginal.Clone(0, 0, imageoriginal.Width, imageoriginal.Height);
+            LockBitmap image = new LockBitmap(imageoriginal);
+            image.LockBits();
+            //  var image = imageoriginal.Clone(0, 0, imageoriginal.Width, imageoriginal.Height);
             var vert = 0;
             while (vert < image.Height)
             {
@@ -243,7 +269,8 @@ namespace OCRTHINGEE
                 }
                 vert++;
             }
-            return image;
+            image.UnlockBits();
+            return image.GetBitmap();
         }
     }
 }
