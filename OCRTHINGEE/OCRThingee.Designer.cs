@@ -221,8 +221,7 @@ namespace OCRTHINGEE
             // 
             // buttonPanel
             // 
-            this.buttonPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPanel.Controls.Add(this.button20);
             this.buttonPanel.Controls.Add(this.btn_DeleteRow);
             this.buttonPanel.Controls.Add(this.btn_AddRowToDatabase);
@@ -264,7 +263,9 @@ namespace OCRTHINGEE
             // dg_OCRRows
             // 
             this.dg_OCRRows.AllowUserToAddRows = false;
-            this.dg_OCRRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dg_OCRRows.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_OCRRows.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg_OCRRows.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.dg_OCRRows.BackgroundColor = System.Drawing.Color.Black;
             this.dg_OCRRows.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -272,7 +273,7 @@ namespace OCRTHINGEE
             this.dg_OCRRows.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -281,7 +282,7 @@ namespace OCRTHINGEE
             this.dg_OCRRows.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -293,7 +294,7 @@ namespace OCRTHINGEE
             this.dg_OCRRows.Name = "dg_OCRRows";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -301,7 +302,7 @@ namespace OCRTHINGEE
             this.dg_OCRRows.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dg_OCRRows.RowHeadersVisible = false;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Red;
             this.dg_OCRRows.RowsDefaultCellStyle = dataGridViewCellStyle4;
@@ -313,6 +314,7 @@ namespace OCRTHINGEE
             // 
             // button1
             // 
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.Location = new System.Drawing.Point(1, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -323,6 +325,7 @@ namespace OCRTHINGEE
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(810, 6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 23);
@@ -333,8 +336,7 @@ namespace OCRTHINGEE
             // 
             // pb2
             // 
-            this.pb2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pb2.Location = new System.Drawing.Point(810, 261);
             this.pb2.Name = "pb2";
             this.pb2.Size = new System.Drawing.Size(180, 72);
@@ -343,6 +345,7 @@ namespace OCRTHINGEE
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Location = new System.Drawing.Point(810, 35);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 23);
@@ -353,7 +356,9 @@ namespace OCRTHINGEE
             // 
             // pb1
             // 
-            this.pb1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pb1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pb1.Location = new System.Drawing.Point(15, 69);
             this.pb1.Name = "pb1";
             this.pb1.Size = new System.Drawing.Size(789, 264);
@@ -373,6 +378,7 @@ namespace OCRTHINGEE
             // 
             // r1
             // 
+            this.r1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.r1.Location = new System.Drawing.Point(940, 16);
             this.r1.Maximum = new decimal(new int[] {
             255,
@@ -390,6 +396,7 @@ namespace OCRTHINGEE
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(977, 0);
             this.label1.Name = "label1";
@@ -399,6 +406,7 @@ namespace OCRTHINGEE
             // 
             // r2
             // 
+            this.r2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.r2.Location = new System.Drawing.Point(940, 42);
             this.r2.Maximum = new decimal(new int[] {
             255,
@@ -416,6 +424,7 @@ namespace OCRTHINGEE
             // 
             // g1
             // 
+            this.g1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.g1.Location = new System.Drawing.Point(940, 88);
             this.g1.Maximum = new decimal(new int[] {
             255,
@@ -433,6 +442,7 @@ namespace OCRTHINGEE
             // 
             // g2
             // 
+            this.g2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.g2.Location = new System.Drawing.Point(940, 114);
             this.g2.Maximum = new decimal(new int[] {
             255,
@@ -450,6 +460,7 @@ namespace OCRTHINGEE
             // 
             // b1
             // 
+            this.b1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.b1.Location = new System.Drawing.Point(940, 161);
             this.b1.Maximum = new decimal(new int[] {
             255,
@@ -462,6 +473,7 @@ namespace OCRTHINGEE
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(977, 71);
             this.label2.Name = "label2";
@@ -471,6 +483,7 @@ namespace OCRTHINGEE
             // 
             // b2
             // 
+            this.b2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.b2.Location = new System.Drawing.Point(940, 188);
             this.b2.Maximum = new decimal(new int[] {
             255,
@@ -498,6 +511,7 @@ namespace OCRTHINGEE
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(977, 137);
             this.label3.Name = "label3";
@@ -507,6 +521,7 @@ namespace OCRTHINGEE
             // 
             // button17
             // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button17.Location = new System.Drawing.Point(810, 122);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(111, 23);
@@ -517,6 +532,7 @@ namespace OCRTHINGEE
             // 
             // button16
             // 
+            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button16.Location = new System.Drawing.Point(810, 93);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(111, 23);
@@ -527,6 +543,7 @@ namespace OCRTHINGEE
             // 
             // button14
             // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button14.Location = new System.Drawing.Point(810, 64);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(111, 23);
@@ -604,7 +621,7 @@ namespace OCRTHINGEE
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -613,7 +630,7 @@ namespace OCRTHINGEE
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -627,19 +644,19 @@ namespace OCRTHINGEE
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Red;
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Eurostile", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(1100, 394);
@@ -764,7 +781,7 @@ namespace OCRTHINGEE
             this.dataGridView5.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -782,7 +799,7 @@ namespace OCRTHINGEE
             this.dataGridView5.DataSource = this.tradeitemsBindingSource;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -795,7 +812,7 @@ namespace OCRTHINGEE
             this.dataGridView5.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -936,7 +953,7 @@ namespace OCRTHINGEE
             this.dataGridView4.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -949,7 +966,7 @@ namespace OCRTHINGEE
             this.dataGridView4.DataSource = this.itemsBindingSource;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -977,14 +994,14 @@ namespace OCRTHINGEE
             this.itemIdDataGridViewTextBoxColumn.HeaderText = "itemId";
             this.itemIdDataGridViewTextBoxColumn.Name = "itemIdDataGridViewTextBoxColumn";
             this.itemIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.itemIdDataGridViewTextBoxColumn.Width = 63;
+            this.itemIdDataGridViewTextBoxColumn.Width = 64;
             // 
             // nameDataGridViewTextBoxColumn2
             // 
             this.nameDataGridViewTextBoxColumn2.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn2.HeaderText = "name";
             this.nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
-            this.nameDataGridViewTextBoxColumn2.Width = 59;
+            this.nameDataGridViewTextBoxColumn2.Width = 60;
             // 
             // itemsBindingSource
             // 
@@ -1041,7 +1058,7 @@ namespace OCRTHINGEE
             this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1055,7 +1072,7 @@ namespace OCRTHINGEE
             this.dataGridView3.DataSource = this.stationsBindingSource;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1068,7 +1085,7 @@ namespace OCRTHINGEE
             this.dataGridView3.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1084,21 +1101,21 @@ namespace OCRTHINGEE
             this.stationIdDataGridViewTextBoxColumn.HeaderText = "stationId";
             this.stationIdDataGridViewTextBoxColumn.Name = "stationIdDataGridViewTextBoxColumn";
             this.stationIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.stationIdDataGridViewTextBoxColumn.Width = 78;
+            this.stationIdDataGridViewTextBoxColumn.Width = 79;
             // 
             // sysidDataGridViewTextBoxColumn
             // 
             this.sysidDataGridViewTextBoxColumn.DataPropertyName = "sysid";
             this.sysidDataGridViewTextBoxColumn.HeaderText = "sysid";
             this.sysidDataGridViewTextBoxColumn.Name = "sysidDataGridViewTextBoxColumn";
-            this.sysidDataGridViewTextBoxColumn.Width = 55;
+            this.sysidDataGridViewTextBoxColumn.Width = 58;
             // 
             // nameDataGridViewTextBoxColumn1
             // 
             this.nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn1.HeaderText = "name";
             this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.Width = 59;
+            this.nameDataGridViewTextBoxColumn1.Width = 60;
             // 
             // stationsBindingSource
             // 
@@ -1136,7 +1153,7 @@ namespace OCRTHINGEE
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle18.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1149,7 +1166,7 @@ namespace OCRTHINGEE
             this.dataGridView2.DataSource = this.systemsBindingSource;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle19.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1163,14 +1180,14 @@ namespace OCRTHINGEE
             this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle20.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             dataGridViewCellStyle21.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Eurostile", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.Red;
             this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle21;
@@ -1187,14 +1204,14 @@ namespace OCRTHINGEE
             this.sysId.HeaderText = "sysId";
             this.sysId.Name = "sysId";
             this.sysId.ReadOnly = true;
-            this.sysId.Width = 57;
+            this.sysId.Width = 59;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.Width = 61;
+            this.nameDataGridViewTextBoxColumn.Width = 60;
             // 
             // systemsBindingSource
             // 

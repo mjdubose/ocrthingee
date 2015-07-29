@@ -244,6 +244,10 @@
     <Content Include="App_Data\test.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\test_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>test.mdf</DependentUpon>
+    </Content>
     <Content Include="test.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

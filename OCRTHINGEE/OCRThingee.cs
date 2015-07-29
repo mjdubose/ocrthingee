@@ -102,47 +102,7 @@ namespace OCRTHINGEE
             pb1.Image = pb1.Image.DefineRowsForImageRipping(_rowholder);
         }
 
-        public static Bitmap ClearHorizontalBars(Bitmap image)
-        {
-            var temp = new LockBitmap(image);
-            temp.LockBits();
-            var vert = 0;
-            while (vert < temp.Height)
-            {
-                var hor = 0;
-                while (hor < temp.Width)
-                {
-                    var color = temp.GetPixel(hor, vert);
-                    if (color.R <= 255 && color.R >= 240 && color.G <= 255 && color.G >= 240 && color.B <= 255 &&
-                        color.B >= 240)
-                    {
-                        temp.SetPixel(hor, vert, Color.White);
-                    }
-                    if (!(color.R == 255 && color.B == 255 && color.G == 255) && (hor == 0))
-                    {
-                        for (var dotwice = -3; dotwice < 3; dotwice++)
-                        {
-                            for (var horclear = 0; horclear < image.Width; horclear++)
-                            {
-                                if (vert + dotwice < 0) continue;
-                                if (vert + dotwice > image.Height - 1)
-                                {
-                                    temp.SetPixel(horclear, vert, Color.White);
-                                    dotwice = 3;
-                                }
-                                else
-                                    temp.SetPixel(horclear, vert + dotwice, Color.White);
-                            }
-                        }
-                    }
-                    hor++;
-                }
-                vert++;
-            }
-            temp.UnlockBits();
-            return temp.GetBitmap();
-        }
-
+    
         private async void button17_Click(object sender, EventArgs e)
         {
             _currentTextValues.Clear();
@@ -196,7 +156,7 @@ namespace OCRTHINGEE
             decimal g2,
             decimal b1, decimal b2)
         {
-            return Task.Run(() => (Image)imageToBeCleaned.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
+            return Task.Run(() => (Image)imageToBeCleaned.Invert().Crop());//.FilterImage(r1, r2, g1, g2, b1, b2).Invert().Crop());
         }
 
         private static Task<ImageAndRowList> DefineRowsForImageRippingAsync(ICloneable pbimage, List<Row> rowlist)
@@ -206,7 +166,7 @@ namespace OCRTHINGEE
 
         private static Task<Bitmap> ClearHorizontalBarsAsync(Bitmap image)
         {
-            return Task.Run(() => ClearHorizontalBars(image));
+            return Task.Run(() => Extensions.ClearHorizontalBars(image));
         }
 
         private static async Task<ImageAndRowList> DefineRowsAsync(ICloneable pbimage, List<Row> rowlist)
