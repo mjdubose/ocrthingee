@@ -290,7 +290,7 @@ namespace OCRTHINGEE
 
         private void RemoveRowsWithNoValidEntries(ConsumerItemsList productlist)
         {
-            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumSupply != "") || (x.TextSupply != "") || (x.GalacticAverage != "")))
+            foreach (var x in _currentTextValues.Where(x => (x.SellPrice != "") || (x.BuyPrice != "") || (x.NumSupply != "")  || (x.GalacticAverage != "")))
             {
                 GridviewDisplayedDataCleanUp(x, productlist);
                 dg_OCRRows.Rows.Add(MakeNewDataGridViewRow(x));
@@ -300,10 +300,7 @@ namespace OCRTHINGEE
         private static void GridviewDisplayedDataCleanUp(RowAsText x, ConsumerItemsList productlist)
         {
             x.GoodsName = productlist.ReturnMostSimilarWord(x.GoodsName);
-            if (!x.TextSupply.Equals(""))
-            {
-                x.TextSupply = productlist.ReturnMostSimilarWord(x.TextSupply);
-            }
+           
             if (x.SellPrice == "")
             {
                 x.SellPrice = "0";
@@ -327,7 +324,7 @@ namespace OCRTHINGEE
         {
             var row = new DataGridViewRow();
             row.CreateCells(dg_OCRRows, Systemname, Stationname, x.GoodsName, x.SellPrice, x.BuyPrice, x.NumSupply,
-                x.TextSupply, x.GalacticAverage);
+                 x.GalacticAverage);
             row.DefaultCellStyle.BackColor = Color.Black;
             row.DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 128, 0);
             row.DefaultCellStyle.Font = new Font("Eurostile", 10, FontStyle.Regular);
@@ -346,15 +343,13 @@ namespace OCRTHINGEE
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
-            dg_OCRRows.Columns.Add(new DataGridViewTextBoxColumn());
             dg_OCRRows.Columns[0].Name = "SystemName";
             dg_OCRRows.Columns[1].Name = "StationName";
             dg_OCRRows.Columns[2].Name = "GoodsName";
             dg_OCRRows.Columns[3].Name = "SellPrice";
             dg_OCRRows.Columns[4].Name = "BuyPrice";
             dg_OCRRows.Columns[5].Name = "NumSupply";
-            dg_OCRRows.Columns[6].Name = "TextSupply";
-            dg_OCRRows.Columns[7].Name = "GalacticAverage";
+            dg_OCRRows.Columns[6].Name = "GalacticAverage";
         }
 
         public Task UpdateDatabaseAsync(elite_testingEntities elite, DataGridView thegrid)
@@ -388,10 +383,7 @@ namespace OCRTHINGEE
                     source.Clone(rownum.RowTop, 684 * source.Width / 1000, 90 * source.Width / 1000,
                         rownum.RowBottom - rownum.RowTop)
                         .ResizeBmp(),
-                TextSupply =
-                    source.Clone(rownum.RowTop, 774 * source.Width / 1000, 72 * source.Width / 1000,
-                        rownum.RowBottom - rownum.RowTop)
-                        .ResizeBmp(),
+               
                 GalacticAverage =
                     source.Clone(rownum.RowTop, 851 * source.Width / 1000, 152 * source.Width / 1000,
                         rownum.RowBottom - rownum.RowTop)
@@ -418,11 +410,7 @@ namespace OCRTHINGEE
                 tesseract.NumSupply = InterfaceOcr.GetText(@"c:\ocrtest\NumSupply.Tiff");
                 @"c:\ocrtest\NumSupply.Tiff".TryToDelete();
 
-                temp.TextSupply.Save(@"c:\ocrtest\TextSupply.Tiff", ImageFormat.Tiff);
-                tesseract.TextSupply = InterfaceOcr.GetText(@"c:\ocrtest\TextSupply.Tiff");
-                @"c:\ocrtest\TextSupply.Tiff".TryToDelete();
-
-                temp.GalacticAverage.Save(@"c:\ocrtest\x.Tiff", ImageFormat.Tiff);
+               temp.GalacticAverage.Save(@"c:\ocrtest\x.Tiff", ImageFormat.Tiff);
                 tesseract.GalacticAverage = InterfaceOcr.GetText(@"c:\ocrtest\x.Tiff");
                 @"c:\ocrtest\x.Tiff".TryToDelete();
 
@@ -541,8 +529,7 @@ namespace OCRTHINGEE
                     cloned.Columns[3].Name = "SellPrice";
                     cloned.Columns[4].Name = "BuyPrice";
                     cloned.Columns[5].Name = "NumSupply";
-                    cloned.Columns[6].Name = "TextSupply";
-                    cloned.Columns[7].Name = "GalacticAverage";
+                    cloned.Columns[6].Name = "GalacticAverage";
 
                     foreach (var y in
                         dg_OCRRows.Rows.Cast<DataGridViewRow>().Where(y => y.Cells[2].Value.ToString() != ""))
@@ -610,7 +597,7 @@ namespace OCRTHINGEE
                 var goodsname = y.Cells[2].FormattedValue.ToString();
                 var sellprice = y.Cells[3].FormattedValue.ToString();
                 var buyprice = y.Cells[4].FormattedValue.ToString();
-                var numsupply = y.Cells[6].FormattedValue.ToString();
+                var numsupply = y.Cells[5].FormattedValue.ToString();
 
                 var thesystem = thissystem.Find(s => s.name == system);
 

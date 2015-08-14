@@ -11,7 +11,7 @@ namespace OCRTHINGEE
        
 
         private string _sellprice;
-        private string _textsupply;
+       
         public string GoodsName { get; set; }
 
         public string SellPrice
@@ -34,11 +34,7 @@ namespace OCRTHINGEE
             set { _numsupply = ClearPunctuationAndWhiteSpace(value); }
         }
 
-        public string TextSupply
-        {
-            get { return _textsupply; }
-            set { _textsupply = value.Trim(); }
-        }
+     
 
         public string GalacticAverage
         {
